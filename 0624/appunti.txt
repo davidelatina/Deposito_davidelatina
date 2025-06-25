@@ -1,0 +1,2 @@
+Java:
+linguaggio OOP ad alto livello di astrazione e fortemente tipizzato
