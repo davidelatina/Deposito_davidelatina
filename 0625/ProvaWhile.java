@@ -12,7 +12,6 @@ public class ProvaWhile {
       System.out.println(i);
     }
 
-
     // do...while
     Scanner input = new Scanner(System.in);
     int numero;
