@@ -14,7 +14,7 @@ public class EsempioMat {
     System.out.println("sqrt(" + a + ") = " + Math.sqrt((double) a));
     System.out.println("|a| = " + Math.abs(a));
     System.out.println("Numero casuale da 0 a 100: " +
-      (int) (Math.random() * 100));
+      (int) (Math.random() * 101));
     // Distruzione scanner
     ScannerNum.close();
   }
