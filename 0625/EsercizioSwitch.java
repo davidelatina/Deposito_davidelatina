@@ -80,11 +80,11 @@ public class EsercizioSwitch {
         case 0:
           break;
         case 1:
-          aumento += 0.15;
+          aumento *= 1.15;
           break;
         case 2:
         case 3:
-          aumento += 0.3;
+          aumento *= 1.3;
           break;
         default:
           // o troppi incidenti o valore invalido
@@ -102,10 +102,10 @@ public class EsercizioSwitch {
       if (età < 18)
         escluso = true;
       else if (età < 25)
-        aumento += 0.2;
+        aumento *= 1.2;
       // nulla se età tra 26 e 50
       else if (età > 50)
-        aumento -= 0.1;
+        aumento *= 0.9;
     }
     
     // anni esperienza alla guida
@@ -117,7 +117,7 @@ public class EsercizioSwitch {
       if (età - esperienza < 14)
         escluso = true; // senza patente non conta
       else if (esperienza < 2)
-        aumento += 0.3;
+        aumento *= 1.3;
       // nulla altrimenti
     }
     
@@ -130,9 +130,9 @@ public class EsercizioSwitch {
       if (pacchetto.equalsIgnoreCase("base")) {
         // non cambia nulla
       } else if (pacchetto.equalsIgnoreCase("intermedio")) {
-        aumento += 0.2;
+        aumento *= 1.2;
       } else if (pacchetto.equalsIgnoreCase("premium")) {
-        aumento += 0.5;
+        aumento *= 1.5;
       } else {
         System.out.println("Spiacente, non offriamo il pacchetto " +
           pacchetto + ".");
@@ -147,7 +147,6 @@ public class EsercizioSwitch {
       System.out.println("Approvato. Gentile " + Nome + " " + Cognome + 
         ", nato il " + annoNascita + ", pagherai " + prezzoBase*aumento + " euro");
     }
-
 
     // Distruzione scanner
     ScannerNum.close();
