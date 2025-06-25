@@ -6,10 +6,10 @@ public class EsercizioWhile {
     Scanner ScannerString = new Scanner(System.in);
 
     // Inserimento password
-    int tentativi = 1;
+    int tentativo = 1;
     String password = "";
-    while (tentativi <= 3) {
-      System.out.println("Inserire password (tentativo " + tentativi +
+    while (tentativo <= 3) {
+      System.out.println("Inserire password (tentativo " + tentativo +
         "/3): ");
       password = ScannerString.nextLine();
     
@@ -17,10 +17,10 @@ public class EsercizioWhile {
       if (password.equals("java123")) break;
       // Password errata
       System.out.println("Password errata.");
-      tentativi++;
+      tentativo++;
     }
     // Solo se l'utente è uscito dal ciclo per eccesso di tentativi
-    if (tentativi == 4) {
+    if (tentativo == 4) {
       System.out.println("Accesso bloccato.");
     } else {
       String selezione = "s";
