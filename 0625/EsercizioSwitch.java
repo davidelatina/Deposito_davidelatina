@@ -108,7 +108,6 @@ public class EsercizioSwitch {
         aumento -= 0.1;
     }
     
-
     // anni esperienza alla guida
     if (!escluso) {
       System.out.println("Anni di esperienza alla guida?");
@@ -122,33 +121,25 @@ public class EsercizioSwitch {
       // nulla altrimenti
     }
     
-
-
     // scelta pacchetto
-    // TODO: riformulare con .equalsIgnoreCase()
     if (!escluso) {
       System.out.println("Selezionare pacchetto assicurativo: " +
-        "Base (1), Intermedio (2) o Premium (3)");
-      int pacchetto = ScannerNum.nextInt();
+        "Base, Intermedio o Premium ");
+      String pacchetto = ScannerString.nextLine();
 
-      if (pacchetto < 1 || pacchetto > 3) {
-        System.out.println("Pacchetto invalido");
+      if (pacchetto.equalsIgnoreCase("base")) {
+        // non cambia nulla
+      } else if (pacchetto.equalsIgnoreCase("intermedio")) {
+        aumento += 0.2;
+      } else if (pacchetto.equalsIgnoreCase("premium")) {
+        aumento += 0.5;
+      } else {
+        System.out.println("Spiacente, non offriamo il pacchetto " +
+          pacchetto + ".");
         escluso = true;
-      } else
-        switch (pacchetto) {
-          case 1: // non cambia nulla
-            break;
-          case 2:
-            aumento += 0.2;
-            break;
-          case 3:
-            aumento += 0.5;
-            break;
-          default:
-        }
+      }
     }
     
-
     // Risultato finale
     if (escluso) {
       System.out.println("Escluso.");
