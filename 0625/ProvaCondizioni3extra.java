@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class ProvaCondizioni3extra {
   public static void main(String[] args) {
     // Partecipazione gara sportiva
