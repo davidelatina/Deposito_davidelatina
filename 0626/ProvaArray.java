@@ -24,6 +24,25 @@ public class ProvaArray {
     }
     System.out.println("");
 
+
+
+    // Array 2D
+    int[][] matrice = new int[3][3];
+
+    int[][] matricePredefinita = {
+      {1, 2, 3},
+      {4, 5, 6},
+      {7, 8, 9}
+    };
+
+    // Stampa
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        System.out.print(matricePredefinita[i][j] + ", ");
+      }
+      System.out.println("");
+    }
+
     scannerNum.close();
   }
 
