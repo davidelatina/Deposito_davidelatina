@@ -36,8 +36,8 @@ public class ProvaArray {
     };
 
     // Stampa
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < matrice.length; i++) {
+      for (int j = 0; j < matrice[i].length; j++) {
         System.out.print(matricePredefinita[i][j] + ", ");
       }
       System.out.println("");
