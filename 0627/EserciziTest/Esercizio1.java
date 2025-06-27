@@ -19,6 +19,7 @@ public class Esercizio1 {
       System.out.println("Inserire un numero valido.");
     }
 
+    // Escluso per sola età
     if (età < 16) {
       System.out.println("Sei troppo giovane per questo corso!");
       idoneo = false;
@@ -33,6 +34,7 @@ public class Esercizio1 {
       System.out.println("Inserire un numero valido.");
     }
 
+    // Escluso per età e certificazioni
     if (idoneo && età < 18 && certificazioni < 1) {
       System.out.println("Tra i 16 e i 18 anni, per partecipare a questo corso devi avere almeno una certificazione!");
       idoneo = false;
@@ -48,10 +50,27 @@ public class Esercizio1 {
       System.out.println("Inserire un numero valido.");
     }
 
+    // Escluso per età ed esperienza
     if (idoneo && età >= 18 && esperienza < 2) {
       System.out.println("Oltre i 18 anni, per partecipare a questo corso devi avere almeno due anni di esperienza!");
+      idoneo = false;
     }
 
+    /*
+     * Le condizioni sono separate solo per evitare che il programma chieda sempre
+     * tutte le domande anche se l'utente è già stato escluso.
+     * 
+     * Alternativamente, condensando la logica in un'unica condizione:
+     * 
+     * if ((16 <= età && età < 18 && certificazioni > 1) ||
+     *     (età >= 18 && esperienza >= 2)) {
+     *   idoneo = true;
+     * } else {
+     *   idoneo = false;
+     * }
+     */
+
+    // Stampa finale
     if (idoneo) {
       System.out.println("Idoneo al corso");
     } else {
