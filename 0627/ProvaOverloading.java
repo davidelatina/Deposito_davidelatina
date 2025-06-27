@@ -10,9 +10,10 @@ public class ProvaOverloading {
 
   public static void main(String[] args) {
     
-    mostra(10);
     // Chiama mostra(int)
+    mostra(10);
     
-    mostra("Ciao"); // Chiama mostra(String)
+    // Chiama mostra(String)
+    mostra("Ciao"); 
   }
 }
