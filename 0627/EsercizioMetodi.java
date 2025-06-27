@@ -49,10 +49,17 @@ public class EsercizioMetodi {
 
       // Lettura scelta input utente
       String scelta;
-      do {
+      while (true) {
         System.out.print("Vuoi inserire una stringa o un numero? (s/n): ");
-        scelta = scannerString.nextLine().trim().toLowerCase();
-      } while (scelta.charAt(0) != 's' && scelta.charAt(0) != 'n');
+        scelta = scannerString.nextLine();
+
+        // Una stringa vuota porta .charAt(0) a lanciare un'eccezione
+        if (scelta.isEmpty()) continue;
+
+        scelta.trim().toLowerCase();
+        if (scelta.charAt(0) == 's' || scelta.charAt(0) == 'n')
+          break;
+      }
 
       // Inserimento da parte dell'utente
       System.out.print("Inserisci l'input: ");
