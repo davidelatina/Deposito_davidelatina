@@ -71,10 +71,45 @@ public class GestioneBiblioteca {
             libreria.addBook(new Book(bufferString, scannerString.nextLine(), true));
           } while (false);
           break;
-        case 2:
+        case 2: // Lista libri
           libreria.displayBooks();
           break;
-          
+        case 3: // Prendi in prestito
+          do {
+            System.out.print("Inserire nome libro: ");
+            bufferString = scannerString.nextLine();
+
+            if (bufferString.isEmpty())
+              continue;
+
+            bufferString.trim();
+
+            if (!libreria.checkBookPresent(bufferString)) {
+              System.out.println("Libro non trovato");
+              break;
+            }
+
+            libreria.borrowBook(libreria.searchBookByName(bufferString));  
+          } while (false);
+          break;    
+        case 4: // Restituisci
+        do {
+          System.out.print("Inserire nome libro: ");
+          bufferString = scannerString.nextLine();
+
+          if (bufferString.isEmpty())
+            continue;
+
+          bufferString.trim();
+
+          if (!libreria.checkBookPresent(bufferString)) {
+            System.out.println("Libro non trovato");
+            break;
+          }
+
+          libreria.returnBook(libreria.searchBookByName(bufferString));
+        } while (false);
+        break;         
           
         
         
@@ -97,11 +132,11 @@ public class GestioneBiblioteca {
       System.out.println("   Gestione Biblioteca");
       System.out.println("1. Aggiungi libro");
       System.out.println("2. Lista libri");
-      System.out.println("3. ");
-      System.out.println("4. ");
-      System.out.println("5. ");
+      System.out.println("3. Prendi in prestito");
+      System.out.println("4. Restituisci");
+      System.out.println("5. Esci");
 
-      System.out.print("Programma: ");
+      System.out.print("Scelta: ");
 
       scelta = scannerNum.nextInt();
 
@@ -137,6 +172,16 @@ class Library {
     return false;
   }
 
+  Book searchBookByName (String name) {
+    if (total == 0)
+      return null;
+    for (Book book : books) {
+      if (book.title.equalsIgnoreCase(name))
+        return book;
+    }
+    return null;
+  }
+
   void displayBooks() {
     System.out.println("Libri della libreria:");
     if (total == 0) {
@@ -149,7 +194,10 @@ class Library {
   }
 
   void borrowBook(Book bookRequested) {
-
+    if (bookRequested == null) {
+      System.out.println("Errore");
+      return;
+    }
     boolean bookFound = false;
     for (Book bookIndex : this.books) {
       if (bookIndex.title.equalsIgnoreCase(bookRequested.title)) {
@@ -165,6 +213,29 @@ class Library {
     }
     if (!bookFound) System.out.println("Non trovato in lista");
   }
+
+  void returnBook(Book bookRequested) {
+    if (bookRequested == null) {
+      System.out.println("Errore");
+      return;
+    }
+    boolean bookFound = false;
+    for (Book bookIndex : this.books) {
+      if (bookIndex.title.equalsIgnoreCase(bookRequested.title)) {
+        if (bookIndex.available) { // libro trovato ancora disponibile
+          System.out.println("Libro non preso in prestito, ancora disponibile");
+        } else {
+          bookIndex.available = true;
+          System.out.println("Libro restituito");
+        }
+        bookFound = true;
+        break;
+      }
+    }
+    if (!bookFound)
+      System.out.println("Non trovato in lista");
+  }
+
 }
 
 class Book {
