@@ -129,12 +129,9 @@ public class GestioneBiblioteca {
               bufferString = scannerString.nextLine();
 
               if (!bufferString.isEmpty()) break;
-            }
+              }
             bufferString.trim();
-            if (libreria.checkBookPresent(bufferString)) {
-              libreria.searchBookByName(bufferString).displayBookInfo();
-              break;
-            }  
+            libreria.printBooksByName(bufferString);
           } else {
             while (true) { // Ricerca per autore
               System.out.print("Inserire nome libro: ");
@@ -144,10 +141,7 @@ public class GestioneBiblioteca {
                 break;
             }
             bufferString.trim();
-            if (libreria.checkBookPresent(bufferString)) {
-              libreria.searchBookByName(bufferString).displayBookInfo();
-              break;
-            }
+            libreria.printBooksByAuthor(bufferString); 
           }
           break;
         default: // non dovrebbe essere raggiungibile
@@ -210,6 +204,7 @@ class Library {
     return false;
   }
 
+  // DA ELIMINARE
   Book searchBookByName (String name) {
     if (total == 0)
       return null;
@@ -220,17 +215,20 @@ class Library {
     return null;
   }
 
-  /*void printBooksByName(String name) {
+  // Cerca libri per titolo
+  void printBooksByName(String name) {
     if (total == 0) {
       return;
     }
-    //name = name.equalsIgnoreCase(name);
+    // Ignora maiuscole-minuscole
+    name = name.toLowerCase();
     for (Book book : books) {
-      if (false)
+      if (book.title.toLowerCase().contains(name))
         book.displayBookInfo();
     }
-  }*/
+  }
 
+  // DA ELIMINARE
   Book searchBookByAuthor(String name) {
     if (total == 0)
       return null;
@@ -241,13 +239,16 @@ class Library {
     return null;
   }
 
-  /* incompleto */
+  
+  // Cerca libri per autore
   void printBooksByAuthor(String name) {
     if (total == 0) {
       return;
     }
+    // Ignora maiuscole-minuscole
+    name = name.toLowerCase();
     for (Book book : books) {
-      if (book.author.equalsIgnoreCase(name))
+      if (book.author.toLowerCase().contains(name))
         book.displayBookInfo();
     }
   }
