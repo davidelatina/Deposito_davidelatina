@@ -220,6 +220,17 @@ class Library {
     return null;
   }
 
+  /*void printBooksByName(String name) {
+    if (total == 0) {
+      return;
+    }
+    //name = name.equalsIgnoreCase(name);
+    for (Book book : books) {
+      if (false)
+        book.displayBookInfo();
+    }
+  }*/
+
   Book searchBookByAuthor(String name) {
     if (total == 0)
       return null;
@@ -228,6 +239,17 @@ class Library {
         return book;
     }
     return null;
+  }
+
+  /* incompleto */
+  void printBooksByAuthor(String name) {
+    if (total == 0) {
+      return;
+    }
+    for (Book book : books) {
+      if (book.author.equalsIgnoreCase(name))
+        book.displayBookInfo();
+    }
   }
 
   void displayBooks() {
