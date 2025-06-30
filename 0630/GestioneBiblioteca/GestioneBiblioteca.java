@@ -48,7 +48,7 @@ public class GestioneBiblioteca {
       // Selezione programma da parte dell'utente
       scelta = menuSelezione(scannerNum);
 
-      if (scelta == 5)
+      if (scelta == 6)
         break; // <--- uscita dal programma
 
       switch (scelta) {
@@ -93,26 +93,63 @@ public class GestioneBiblioteca {
           } while (false);
           break;    
         case 4: // Restituisci
-        do {
-          System.out.print("Inserire nome libro: ");
-          bufferString = scannerString.nextLine();
+          do {
+            System.out.print("Inserire nome libro: ");
+            bufferString = scannerString.nextLine();
 
-          if (bufferString.isEmpty())
-            continue;
+            if (bufferString.isEmpty())
+              continue;
 
-          bufferString.trim();
+            bufferString.trim();
 
-          if (!libreria.checkBookPresent(bufferString)) {
-            System.out.println("Libro non trovato");
-            break;
+            if (!libreria.checkBookPresent(bufferString)) {
+              System.out.println("Libro non trovato");
+              break;
+            }
+
+            libreria.returnBook(libreria.searchBookByName(bufferString));
+          } while (false);
+          break;         
+        case 5: // Cerca
+          while (true) {
+            System.out.print("Vuoi cercare per nome o autore? (n/a): ");
+            bufferString = scannerString.nextLine();
+
+            // Una stringa vuota porta .charAt(0) a lanciare un'eccezione
+            if (bufferString.isEmpty())
+              continue;
+
+            bufferString.trim().toLowerCase();
+            if (bufferString.charAt(0) == 'n' || bufferString.charAt(0) == 'a')
+              break;
           }
+          if (bufferString.charAt(0) == 'n') {
+            while (true) { // Ricerca per nome
+              System.out.print("Inserire nome libro: ");
+              bufferString = scannerString.nextLine();
 
-          libreria.returnBook(libreria.searchBookByName(bufferString));
-        } while (false);
-        break;         
-          
-        
-        
+              if (!bufferString.isEmpty()) break;
+            }
+            bufferString.trim();
+            if (libreria.checkBookPresent(bufferString)) {
+              libreria.searchBookByName(bufferString).displayBookInfo();
+              break;
+            }  
+          } else {
+            while (true) { // Ricerca per autore
+              System.out.print("Inserire nome libro: ");
+              bufferString = scannerString.nextLine();
+
+              if (!bufferString.isEmpty())
+                break;
+            }
+            bufferString.trim();
+            if (libreria.checkBookPresent(bufferString)) {
+              libreria.searchBookByName(bufferString).displayBookInfo();
+              break;
+            }
+          }
+          break;
         default: // non dovrebbe essere raggiungibile
           System.out.println("Errore selezione programma");
           break;
@@ -134,16 +171,17 @@ public class GestioneBiblioteca {
       System.out.println("2. Lista libri");
       System.out.println("3. Prendi in prestito");
       System.out.println("4. Restituisci");
-      System.out.println("5. Esci");
+      System.out.println("5. Cerca");
+      System.out.println("6. Esci");
 
       System.out.print("Scelta: ");
 
       scelta = scannerNum.nextInt();
 
-      if (1 <= scelta && scelta <= 5)
+      if (1 <= scelta && scelta <= 6)
         return scelta; // <--- Uscita funzione
 
-      System.out.println("Inserire un numero da 1 a 5.");
+      System.out.println("Inserire un numero da 1 a 6.");
     }
   }
 }
@@ -177,6 +215,16 @@ class Library {
       return null;
     for (Book book : books) {
       if (book.title.equalsIgnoreCase(name))
+        return book;
+    }
+    return null;
+  }
+
+  Book searchBookByAuthor(String name) {
+    if (total == 0)
+      return null;
+    for (Book book : books) {
+      if (book.author.equalsIgnoreCase(name))
         return book;
     }
     return null;
