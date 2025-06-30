@@ -28,22 +28,9 @@ public class EsercizioRecap {
     String sceltaCaso4 = ""; // per scegliere tra variabile primitiva o elemento di array
 
     while (true) { // loop principale programma. si esce inserendo 5
-      while (true) { // menu selezione
-        System.out.println("   Esercizio recap. Seleziona funzionalità:");
-        System.out.println("1. Somma di due numeri");
-        System.out.println("2. Moltiplicazione in Overloading");
-        System.out.println("3. Ricorsione - Somma dei Numeri Naturali");
-        System.out.println("4. Passaggio per Valore & Passaggio per Riferimento");
-        System.out.println("5. Esci dal programma");
 
-        System.out.println("Programma: ");
-
-        scelta = scannerNum.nextInt();
-
-        if (1 <= scelta && scelta <= 5) break;
-
-        System.out.println("Inserire un numero da 1 a 5.");
-      }
+      // Selezione programma da parte dell'utente
+      scelta = menuSelezione(scannerNum);
 
       if (scelta == 5) break; // <--- uscita dal programma
 
@@ -142,6 +129,27 @@ public class EsercizioRecap {
     // Chiusura scanner
     scannerNum.close();
     scannerString.close();
+  }
+
+  // Menu di selezione
+  static int menuSelezione(Scanner scannerNum) {
+    int scelta = -1;
+    while (true) { // Loop continuo di selezione. uscita con selezione valida
+      System.out.println("   Esercizio recap. Seleziona funzionalità:");
+      System.out.println("1. Somma di due numeri");
+      System.out.println("2. Moltiplicazione in Overloading");
+      System.out.println("3. Ricorsione - Somma dei Numeri Naturali");
+      System.out.println("4. Passaggio per Valore & Passaggio per Riferimento");
+      System.out.println("5. Esci dal programma");
+
+      System.out.print("Programma: ");
+
+      scelta = scannerNum.nextInt();
+
+      if (1 <= scelta && scelta <= 5) return scelta; // <--- Uscita funzione
+
+      System.out.println("Inserire un numero da 1 a 5.");
+    }
   }
 
   // 1. Somma di due numeri
