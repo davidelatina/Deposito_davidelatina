@@ -2,21 +2,15 @@ import java.util.Scanner;
 
 public class Utility {
 
-
-
-  /**@brief             Menu di selezione a interi.
-   *                    
-   *                    Offre all'utente opzioni da 1 a n, in base all'array
-   *                    di stringhe di lunghezza n+1 inserito.
-   * 
-   * @param scannerNum  Scanner per lettura input utente.
-   * @param menu        Stringa contenente il nome del menu in posizione zero,
-   *                    e le opzioni a seguire. Deve contenere almeno 2 elementi,
-   *                    ma sarebbe inutile avendone meno di 3.
-   * 
-   * @return            Opzione scelta dall'utente, un numero compreso tra 1 e 
-   *                    l'ampiezza della stringa in argomento meno uno.
-   *                    Restituisce -1 in caso di errore.
+  /**
+   * @brief Menu di selezione a interi.
+   *     <p>Offre all'utente opzioni da 1 a n, in base all'array di stringhe di lunghezza n+1
+   *     inserito.
+   * @param scannerNum Scanner per lettura input utente.
+   * @param menu Stringa contenente il nome del menu in posizione zero, e le opzioni a seguire. Deve
+   *     contenere almeno 2 elementi, ma sarebbe inutile avendone meno di 3.
+   * @return Opzione scelta dall'utente, un numero compreso tra 1 e l'ampiezza della stringa in
+   *     argomento meno uno. Restituisce -1 in caso di errore.
    */
   public static int menuInt(Scanner scannerNum, String[] menu) {
     // --- Verifica argomenti
@@ -38,7 +32,7 @@ public class Utility {
     while (true) { // Loop continuo di selezione. uscita con selezione valida
       // Stampa testo menu
       System.out.println("   " + menu[0]);
-      for(int i = 1; i < size; i++) {
+      for (int i = 1; i < size; i++) {
         System.out.println(i + ". " + menu[i]);
       }
       // Accolta input utente
@@ -46,30 +40,22 @@ public class Utility {
       scelta = scannerNum.nextInt();
 
       // Verifica input
-      if (1 <= scelta && scelta < size)
-        return scelta; // <--- Uscita funzione
+      if (1 <= scelta && scelta < size) return scelta; // <--- Uscita funzione
 
-      System.out.println("Inserire un numero da 1 a " + (size-1));
+      System.out.println("Inserire un numero da 1 a " + (size - 1));
     }
   }
 
-  /**@brief                Richiesta di selezione per caratteri (case-insensitive).
-   * 
-   * @param scannerString  Scanner per lettura input utente.
-   * @param requestMsg     Messaggio di richiesta input.
-   * @param wrongInputMsg  Messaggio opzionale di avvertimento per input errato.
-   *                       "" per omettere.
-   * @param options        Array di caratteri accettati per l'input.
-   *                       Non deve essere vuoto.
-   * 
-   * @return               Carattere scelto dall'utente.
-   *                       In caso di errore, restituisce carattere nullo ('\0').
+  /**
+   * @brief Richiesta di selezione per caratteri (case-insensitive).
+   * @param scannerString Scanner per lettura input utente.
+   * @param requestMsg Messaggio di richiesta input.
+   * @param wrongInputMsg Messaggio opzionale di avvertimento per input errato. "" per omettere.
+   * @param options Array di caratteri accettati per l'input. Non deve essere vuoto.
+   * @return Carattere scelto dall'utente. In caso di errore, restituisce carattere nullo ('\0').
    */
   public static char selectionByChar(
-      Scanner scannerString,
-      String requestMsg, 
-      String wrongInputMsg, 
-      char[] options) {
+      Scanner scannerString, String requestMsg, String wrongInputMsg, char[] options) {
     // --- Verifica argomenti
     if (scannerString == null) {
       System.out.println("Errore selezione per caratteri: scanner nullo");
@@ -88,15 +74,15 @@ public class Utility {
     while (true) { // Loop continua fino a input corretto utente.
 
       // Richiesta all'utente in formato
-      //    requestMsg (a/b/c/d) 
+      //    requestMsg (a/b/c/d)
       System.out.print(requestMsg);
 
       System.out.print(" (");
-      for (int i = 0; i < (options.length-1); i++) {
+      for (int i = 0; i < (options.length - 1); i++) {
         System.out.print(options[i] + "/");
       }
-      System.out.print(options[options.length-1] + ") ");
-      
+      System.out.print(options[options.length - 1] + ") ");
+
       // Input utente
       String bufferString = scannerString.nextLine();
 
@@ -111,14 +97,14 @@ public class Utility {
 
       // Stringa non vuota da validare. Ignorando maiuscole/minuscole
       bufferString.toLowerCase();
-      
+
       char selection = bufferString.charAt(0);
       for (int i = 0; i < options.length; i++) {
         if (selection == options[i]) {
           return selection; // <--------------------- USCITA DA LOOP E FUNZIONE
         }
       }
-      
+
       // Carattere inserito non è tra le opzioni
       if (!wrongInputMsg.isEmpty()) {
         System.out.println(wrongInputMsg);
@@ -126,21 +112,19 @@ public class Utility {
     }
   }
 
-  /**@brief                Input stringa da terminale con verifiche.
-   * 
-   * @param scannerString  Scanner per lettura stringhe.
-   * @param requestMsg     Messaggio di richiesta inserimento input.
-   * @param wrongInputMsg  Messaggio opzionale per input non valido. 
-   *                       "" per omettere.
-   * @param acceptNull     True per accettare stringhe nulle.
-   * @param acceptEmpty    True per accettare stringhe vuote.
-   * @param acceptBlank    True per accettare stringhe di solo whitespace.
-   * @return               Stringa inserita dall'utente.
-   *                       In caso di errore, restituisce null.
+  /**
+   * @brief Input stringa da terminale con verifiche.
+   * @param scannerString Scanner per lettura stringhe.
+   * @param requestMsg Messaggio di richiesta inserimento input.
+   * @param wrongInputMsg Messaggio opzionale per input non valido. "" per omettere.
+   * @param acceptNull True per accettare stringhe nulle.
+   * @param acceptEmpty True per accettare stringhe vuote.
+   * @param acceptBlank True per accettare stringhe di solo whitespace.
+   * @return Stringa inserita dall'utente. In caso di errore, restituisce null.
    */
   public static String verifiedInputString(
       Scanner scannerString,
-      String requestMsg, 
+      String requestMsg,
       String wrongInputMsg,
       boolean acceptNull,
       boolean acceptEmpty,
@@ -162,7 +146,7 @@ public class Utility {
       String bufferString = scannerString.nextLine();
 
       // Verifica input
-      if (   (!acceptNull && bufferString == null)
+      if ((!acceptNull && bufferString == null)
           || (!acceptEmpty && bufferString.isEmpty())
           || (!acceptBlank && bufferString.isBlank())) {
         if (!wrongInputMsg.isEmpty()) {
@@ -175,11 +159,7 @@ public class Utility {
   }
 
   public static int verifiedInputIntRange(
-      int min,
-      int max,
-      Scanner scannerNum,
-      String requestMsg,
-      String wrongInputMsg) {
+      int min, int max, Scanner scannerNum, String requestMsg, String wrongInputMsg) {
     // --- Verifica argomenti
     if (scannerNum == null) {
       System.out.println("Errore selezione intero: scanner nullo");
@@ -204,15 +184,11 @@ public class Utility {
           System.out.println(wrongInputMsg);
         }
       }
-    } 
+    }
   }
 
   public static double verifiedInputDoubleRange(
-      double min,
-      double max,
-      Scanner scannerNum,
-      String requestMsg,
-      String wrongInputMsg) {
+      double min, double max, Scanner scannerNum, String requestMsg, String wrongInputMsg) {
     // --- Verifica argomenti
     if (scannerNum == null) {
       System.out.println("Errore selezione double: scanner nullo");
@@ -239,8 +215,4 @@ public class Utility {
       }
     }
   }
-
-
-
-
 }
