@@ -1,5 +1,5 @@
 /*
-Incapsulamento con la Classe Studente 
+Incapsulamento con la Classe Studente
 Obiettivo:Comprendere e applicare il concetto di incapsulamento in Java tramite l’uso di attributi privati e metodi getter/setter.
 
 Traccia: Crea una classe Studente con i seguenti attributi privati:
@@ -18,6 +18,8 @@ Nel main:
   Gestire la lista di studenti tramite un arraylist rendere possibile la ricerca di uno studente  tramite nome
 */
 
+// Extra: metodo private, classe annidata.
+
 import java.util.Scanner;
 
 public class EsercizioIncapsulamento {
@@ -32,24 +34,21 @@ public class EsercizioIncapsulamento {
     char scelta = 'n';
 
     // Stampa nome e voto iniziale
-    System.out.println("Studente #" + pippo.getId() + ":\t" + pippo.getNome());
-    System.out.println("Voto:\t" + pippo.getVoto());
-
+    System.out.println("Studente #" + pippo.getId() + ": " + pippo.getNome());
+    System.out.println("Voto:\t\t" + pippo.getVoto());
 
     // Cambiamento voto
-    char[] opzioni = {'y','n'};
-    scelta = selectionByChar(
-      scannerNum, 
-      "Inserire un voto diverso?", 
-      "Inserire un carattere valido", 
-      opzioni);
+    char[] opzioni = {'y', 'n'};
+    scelta =
+        selectionByChar(
+            scannerNum, "Inserire un voto diverso? ", "Inserire un carattere valido", opzioni);
 
     // Cambiamento voto confermato
     if (scelta == 'y') {
       System.out.println("Inserire nuovo voto: ");
       pippo.setVoto(scannerNum.nextInt());
     }
-    
+
     // Stampa nome e voto finale
     System.out.println("Studente #" + pippo.getId() + ":\t" + pippo.getNome());
     System.out.println("Voto:\t" + pippo.getVoto());
@@ -60,22 +59,14 @@ public class EsercizioIncapsulamento {
 
   /**
    * @brief Richiesta di selezione per caratteri (case-insensitive).
-   * 
    * @param scannerString Scanner per lettura input utente.
-   * @param requestMsg    Messaggio di richiesta input.
-   * @param wrongInputMsg Messaggio opzionale di avvertimento per input errato.
-   *                      "" per omettere.
-   * @param options       Array di caratteri accettati per l'input.
-   *                      Non deve essere vuoto.
-   * 
-   * @return Carattere scelto dall'utente.
-   *         In caso di errore, restituisce carattere nullo ('\0').
+   * @param requestMsg Messaggio di richiesta input.
+   * @param wrongInputMsg Messaggio opzionale di avvertimento per input errato. "" per omettere.
+   * @param options Array di caratteri accettati per l'input. Non deve essere vuoto.
+   * @return Carattere scelto dall'utente. In caso di errore, restituisce carattere nullo ('\0').
    */
   public static char selectionByChar(
-      Scanner scannerString,
-      String requestMsg,
-      String wrongInputMsg,
-      char[] options) {
+      Scanner scannerString, String requestMsg, String wrongInputMsg, char[] options) {
     // --- Verifica argomenti
     if (scannerString == null) {
       System.out.println("Errore selezione per caratteri: scanner nullo");
@@ -131,13 +122,14 @@ public class EsercizioIncapsulamento {
       }
     }
   }
-
 }
-
 
 class Studente {
   // Variabili statiche
   private static int totale = 0;
+
+  private static int votoMin = 0;
+  private static int votoMax = 10;
 
   // Variabili di istanza
   private String nome;
@@ -148,8 +140,12 @@ class Studente {
   Studente(String nome, int voto) {
     this.nome = nome;
     this.voto = voto;
-    this.id = totale+1; // Cominciando a contare da 1
+    this.id = totale + 1; // Cominciando a contare da 1
     totale++;
+  }
+
+  int getId() {
+    return this.id;
   }
 
   String getNome() {
@@ -160,15 +156,17 @@ class Studente {
     return this.voto;
   }
 
+  // Imposta nuovo voto, solo se valido
   void setVoto(int votoNew) {
-    if (votoNew < 0 || 10 < votoNew) {
+    if (!votoValido(votoNew)) {
       System.out.println("Voto invalido. Nessuna modifica effettuata.");
       return;
     }
     this.voto = votoNew;
   }
 
-  int getId() {
-    return this.id;
+  // Metodo privato
+  private boolean votoValido(int n) {
+    return votoMin <= n && n <= votoMax;
   }
 }
