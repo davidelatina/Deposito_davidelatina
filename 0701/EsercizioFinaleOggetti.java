@@ -89,19 +89,19 @@ public class EsercizioFinaleOggetti {
   }
 
   /**
-   * @brief Menu di selezione a interi.
+   * @brief             Menu di selezione a interi.
+   *            
+   *                    Offre all'utente opzioni da 1 a n, in base all'array
+   *                    di stringhe di lunghezza n+1 inserito.
    * 
-   *        Offre all'utente opzioni da 1 a n, in base all'array
-   *        di stringhe di lunghezza n+1 inserito.
-   * 
-   * @param scannerNum Scanner per lettura input utente.
-   * @param menu       Stringa contenente il nome del menu in posizione zero,
-   *                   e le opzioni a seguire. Deve contenere almeno 2 elementi,
-   *                   ma sarebbe inutile avendone meno di 3.
-   * 
-   * @return Opzione scelta dall'utente, un numero compreso tra 1 e
-   *         l'ampiezza della stringa in argomento.
-   *         Restituisce -1 in caso di errore.
+   * @param scannerNum  Scanner per lettura input utente.
+   * @param menu        Stringa contenente il nome del menu in posizione zero,
+   *                    e le opzioni a seguire. Deve contenere almeno 2 elementi,
+   *                    ma sarebbe inutile avendone meno di 3.
+   *  
+   * @return            Opzione scelta dall'utente, un numero compreso tra 1 e
+   *                    l'ampiezza della stringa in argomento meno uno.
+   *                    Restituisce -1 in caso di errore.
    */
   public static int menuInt(Scanner scannerNum, String[] menu) {
     // --- Verifica argomenti

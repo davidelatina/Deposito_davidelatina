@@ -15,7 +15,7 @@ public class Utility {
    *                    ma sarebbe inutile avendone meno di 3.
    * 
    * @return            Opzione scelta dall'utente, un numero compreso tra 1 e 
-   *                    l'ampiezza della stringa in argomento.
+   *                    l'ampiezza della stringa in argomento meno uno.
    *                    Restituisce -1 in caso di errore.
    */
   public static int menuInt(Scanner scannerNum, String[] menu) {
