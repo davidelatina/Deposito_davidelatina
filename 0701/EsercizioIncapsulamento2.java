@@ -48,14 +48,188 @@ public class EsercizioIncapsulamento2 {
     myCA.addPilota(new Pilota("Pippo", "pip001", 100));
     myCA.addPilota(new Pilota("Paperino", "pap313", 1));
 
+    // buffer inserimento dati utente
+    String bufferString1 = "";
+    String bufferString2 = "";
+    int bufferInt = -1;
 
-    // Stampa
+    // Loop principale programma
+    while (true) {
+      // Mostra menu
+      String[] menu = {
+        "Gestione Compagnia Aerea", "Aggiungi aereo", "Aggiungi pilota", "Stampa info", "Esci"
+      };
+      int scelta = menuInt(scannerNum, menu);
+
+      if (scelta == menu.length - 1) break; // <--------- USCITA LOOP E PROGRAMMA
+
+      switch (scelta) {
+        case 1: // Aggiungi aereo
+          // modello
+          bufferString1 =
+              verifiedInputString(scannerString, "Inserire modello: ", "", false, false, false);
+          // Numero posti
+          bufferInt =
+              verifiedInputIntRange(
+                  Integer.MIN_VALUE, Integer.MAX_VALUE, scannerNum, "Inserire numero posti: ", "");
+          // Codice
+          bufferString2 =
+              verifiedInputString(
+                  scannerString, "Inserire codice alfanumerico: ", "", false, false, false);
+          // Tentativo di inserimento
+          myCA.addAereo(new Aereo(bufferString1, bufferInt, bufferString2));
+          break;
+
+        case 2: // Aggiungi pilota
+          // Nome
+          bufferString1 =
+              verifiedInputString(scannerString, "Inserire nome pilota: ", "", false, false, false);
+          // Numero brevetto
+          bufferString2 =
+              verifiedInputString(
+                  scannerString, "Inserire numero brevetto: ", "", false, false, false);
+          // Ore di volo
+          bufferInt =
+              verifiedInputIntRange(
+                  Integer.MIN_VALUE, Integer.MAX_VALUE, scannerNum, "Inserire ore di volo: ", "");
+          // Tentativo di inserimento
+          myCA.addPilota(new Pilota(bufferString1, bufferString2, bufferInt));
+
+        case 3: // Stampa info
+          myCA.print();
+          break;
+        default: // Non dovrebbe essere raggiungibile
+          System.out.println("Errore selezione funzionalità");
+          break;
+      }
+      System.out.println(""); // Per andare a capo
+    }
+
+    // Stampa finale
     myCA.print();
-
 
     // Chiusura scanner
     scannerNum.close();
     scannerString.close();
+  }
+
+  /**
+   * @brief Menu di selezione a interi.
+   *     <p>Offre all'utente opzioni da 1 a n, in base all'array di stringhe di lunghezza n+1
+   *     inserito.
+   * @param scannerNum Scanner per lettura input utente.
+   * @param menu Stringa contenente il nome del menu in posizione zero, e le opzioni a seguire. Deve
+   *     contenere almeno 2 elementi, ma sarebbe inutile avendone meno di 3.
+   * @return Opzione scelta dall'utente, un numero compreso tra 1 e l'ampiezza della stringa in
+   *     argomento meno uno. Restituisce -1 in caso di errore.
+   */
+  public static int menuInt(Scanner scannerNum, String[] menu) {
+    // --- Verifica argomenti
+    if (scannerNum == null) {
+      System.out.println("Errore: scanner nullo");
+      return -1;
+    }
+
+    // Lunghezza array di stringhe in input
+    // Corrisponde a numero di opzioni meno uno
+    int size = menu.length;
+    if (size < 2) {
+      System.out.println("Errore: troppi pochi elementi del menu");
+      return -1;
+    }
+
+    // --- Corpo funzione
+    int scelta = -1;
+    while (true) { // Loop continuo di selezione. uscita con selezione valida
+      // Stampa testo menu
+      System.out.println("   " + menu[0]);
+      for (int i = 1; i < size; i++) {
+        System.out.println(i + ". " + menu[i]);
+      }
+      // Accolta input utente
+      System.out.print("Scelta: ");
+      scelta = scannerNum.nextInt();
+
+      // Verifica input
+      if (1 <= scelta && scelta < size) return scelta; // <--- Uscita funzione
+
+      System.out.println("Inserire un numero da 1 a " + (size - 1));
+    }
+  }
+
+  /**
+   * @brief Input stringa da terminale con verifiche.
+   * @param scannerString Scanner per lettura stringhe.
+   * @param requestMsg Messaggio di richiesta inserimento input.
+   * @param wrongInputMsg Messaggio opzionale per input non valido. "" per omettere.
+   * @param acceptNull True per accettare stringhe nulle.
+   * @param acceptEmpty True per accettare stringhe vuote.
+   * @param acceptBlank True per accettare stringhe di solo whitespace.
+   * @return Stringa inserita dall'utente. In caso di errore, restituisce null.
+   */
+  public static String verifiedInputString(
+      Scanner scannerString,
+      String requestMsg,
+      String wrongInputMsg,
+      boolean acceptNull,
+      boolean acceptEmpty,
+      boolean acceptBlank) {
+    // --- Verifica argomenti
+    if (scannerString == null) {
+      System.out.println("Errore selezione per caratteri: scanner nullo");
+      return null;
+    }
+    if (requestMsg.isBlank()) {
+      System.out.println("Errore selezione per caratteri: messaggio vuoto");
+      return null;
+    }
+
+    // --- Corpo funzione
+    while (true) { // Loop continua fino a input corretto utente.
+      System.out.print(requestMsg);
+
+      String bufferString = scannerString.nextLine();
+
+      // Verifica input
+      if ((!acceptNull && bufferString == null)
+          || (!acceptEmpty && bufferString.isEmpty())
+          || (!acceptBlank && bufferString.isBlank())) {
+        if (!wrongInputMsg.isEmpty()) {
+          System.out.println(wrongInputMsg);
+        }
+      } else {
+        return bufferString; // <----------------------- USCITA LOOP E FUNZIONE
+      }
+    }
+  }
+
+  public static int verifiedInputIntRange(
+      int min, int max, Scanner scannerNum, String requestMsg, String wrongInputMsg) {
+    // --- Verifica argomenti
+    if (scannerNum == null) {
+      System.out.println("Errore selezione intero: scanner nullo");
+      return -1;
+    }
+    if (requestMsg.isBlank()) {
+      System.out.println("Errore selezione intero: messaggio vuoto");
+      return -1;
+    }
+
+    // --- Corpo funzione
+    while (true) { // Loop continua fino a input corretto utente.
+      System.out.print(requestMsg);
+
+      int bufferNum = scannerNum.nextInt();
+
+      // Verifica input
+      if (min <= bufferNum && bufferNum <= max) {
+        return bufferNum; // <-------------------------- USCITA LOOP E FUNZIONE
+      } else {
+        if (!wrongInputMsg.isEmpty()) {
+          System.out.println(wrongInputMsg);
+        }
+      }
+    }
   }
 }
 
@@ -74,11 +248,19 @@ class CompagniaAerea {
 
   // Aggiungi aereo alla flotta
   void addAereo(Aereo myAereo) {
+    if (myAereo.getNumeroPosti() <= 0) {
+      System.out.println("Numero posti invalido");
+      return;
+    }
     this.flotta.add(myAereo);
   }
 
   // Aggiungi pilota
   void addPilota(Pilota myPilota) {
+    if (myPilota.getOreVolo() <= 0) {
+      System.out.println("Numero posti invalido");
+      return;
+    }
     this.piloti.add(myPilota);
   }
 
@@ -106,7 +288,6 @@ class CompagniaAerea {
     printPiloti();
   }
 }
-
 
 class Pilota {
   // Variabili d'istanza
@@ -153,8 +334,13 @@ class Pilota {
   // Stampa informazioni
   void print() {
     System.out.println(
-      this.nome + " - " + this.numeroBrevetto + " - " + this.oreVolo + 
-      (this.oreVolo == 1 ? " ora" : " ore") + " di volo");
+        this.nome
+            + " - "
+            + this.numeroBrevetto
+            + " - "
+            + this.oreVolo
+            + (this.oreVolo == 1 ? " ora" : " ore")
+            + " di volo");
   }
 }
 
@@ -199,7 +385,6 @@ class Aereo {
     }
     this.numeroPosti = numeroPosti;
   }
-
 
   // Stampa informazioni
   void print() {
