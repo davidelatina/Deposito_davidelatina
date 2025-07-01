@@ -91,7 +91,7 @@ public class Utility {
       //    requestMsg (a/b/c/d) 
       System.out.print(requestMsg);
 
-      System.out.println("(");
+      System.out.print(" (");
       for (int i = 0; i < (options.length-1); i++) {
         System.out.print(options[i] + "/");
       }
