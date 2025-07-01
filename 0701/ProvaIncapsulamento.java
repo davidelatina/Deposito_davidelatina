@@ -16,24 +16,26 @@ class Person {
     this.nome = nome;
     this.eta = eta;
   }
+
   // Costruttore vuoto
-  public Person() {};
+  public Person() {}
+  ;
 
   // Getter
-  public String getName() { 
+  public String getName() {
     return nome;
   }
 
   // Setter
-  public void setName(String newName) { 
+  public void setName(String newName) {
     this.nome = newName;
   }
 
   // Metodo privato utilizzato dalla classe
   private boolean verificaMaggiorenne() {
     return this.eta >= 18;
-  } 
-  
+  }
+
   // Metodo pubblico che fa uso del metodo privato
   public void stampaStatus() {
     if (verificaMaggiorenne()) {
