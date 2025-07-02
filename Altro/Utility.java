@@ -2,11 +2,17 @@ import java.util.Scanner;
 
 public abstract class Utility {
 
+  // Funzione main qui solo per fare dei test
   public static void main(String[] args) {
     Scanner scannerNum = new Scanner(System.in);
     Scanner scannerString = new Scanner(System.in);
 
     int scelta = -1;
+
+    // Valori in lettura
+    String bufferString = "";
+    int bufferInt = -1;
+    double bufferDouble = -1.0;
 
     while (true) {
 
@@ -18,27 +24,22 @@ public abstract class Utility {
 
       switch (scelta) {
         case 2: // selectionByChar
-          selectionByChar(scannerString, "qwerty", "uiop", new char[]{'a','b','c'});
+          char sel = selectionByChar(scannerString, "qwerty", "uiop", new char[]{'a','b','c'});
           break;
         case 3: // verifiedInputString
-          verifiedInputString(scannerString, "insert string: ", "", false, false, false);
+          bufferString = verifiedInputString(scannerString, "insert string: ", "", false, false, false);
           break;
         case 4: // verifiedInputIntRange
-          verifiedInputIntRange(0,Integer.MAX_VALUE, scannerNum, "insert int: ", "");
+          bufferInt = verifiedInputIntRange(0,Integer.MAX_VALUE, scannerNum, "insert int: ", "");
           break;
         case 5: // verifiedInputDoubleRange
-          verifiedInputDoubleRange(0.0, Double.MAX_VALUE, scannerNum, "insert double: ", "");
+          bufferDouble = verifiedInputDoubleRange(0.0, Double.MAX_VALUE, scannerNum, "insert double: ", "");
           break; 
         default: // Should be unreachable
           System.out.println("Error");
           break;
       }
-
-
-
     }
-
-
 
     scannerString.close();
     scannerNum.close();
