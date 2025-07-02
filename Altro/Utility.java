@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
-public class Utility {
-
+public abstract class Utility {
 
   public static void main(String[] args) {
     Scanner scannerNum = new Scanner(System.in);
