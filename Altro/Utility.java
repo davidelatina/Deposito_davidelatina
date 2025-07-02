@@ -1,3 +1,5 @@
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public abstract class Utility {
@@ -45,55 +47,152 @@ public abstract class Utility {
     scannerNum.close();
   }
 
-  /**
-   * @brief Menu di selezione a interi.
+  /** @brief Menù di selezione a interi.
    *     <p>Offre all'utente opzioni da 1 a n, in base all'array di stringhe di lunghezza n+1
    *     inserito.
    * @param scannerNum Scanner per lettura input utente.
    * @param menu Stringa contenente il nome del menu in posizione zero, e le opzioni a seguire. Deve
    *     contenere almeno 2 elementi, ma sarebbe inutile avendone meno di 3.
-   * @return Opzione scelta dall'utente, un numero compreso tra 1 e l'ampiezza della stringa in
-   *     argomento meno uno. Restituisce -1 in caso di errore.
+   * @return Opzione scelta dall'utente: un numero compreso tra 1 e n dove n è l'ampiezza della stringa in
+   *     argomento meno uno.
+   * @throws RuntimeException per input inutilizzabile o eccezioni Scanner.
    */
-  public static int menuInt(Scanner scannerNum, String[] menu) {
+  public static int menuInt(Scanner scannerNum, String[] menu) throws RuntimeException {
     // --- Verifica argomenti
     if (scannerNum == null) {
-      System.out.println("Errore: scanner nullo");
-      return -1;
+      return menuInt(menu);
     }
-
+  
     // Lunghezza array di stringhe in input
     // Corrisponde a numero di opzioni meno uno
     int size = menu.length;
+
+    // Verifica numero elementi del menu
     if (size < 2) {
-      System.out.println("Errore: troppi pochi elementi del menu");
-      return -1;
+      throw new RuntimeException("Elementi menu insufficienti");
     }
 
     // --- Corpo funzione
+
+    // Scelta inserita dall'utente
     int scelta = -1;
+
     while (true) { // Loop continuo di selezione. uscita con selezione valida
+
       // Stampa testo menu
       System.out.println("   " + menu[0]);
       for (int i = 1; i < size; i++) {
         System.out.println(i + ". " + menu[i]);
       }
+
       // Accolta input utente
       System.out.print("Scelta: ");
+
+      // Blocco try-catch per accogliere eccezioni Scanner
       try {
         scelta = scannerNum.nextInt();
-      } catch (Exception e) {
-        // e.printStackTrace();
-        System.out.println(e.getMessage());
-        scannerNum.nextLine(); // Sblocca scanner
+
+        // next token does not match the Integer regular expression, or is out of range
+      } catch (InputMismatchException e) {
+        // Inserito un non numero o non intero
+        System.out.println("Inserire un numero intero da 1 a " + (size - 1));
+        // Sblocca scanner e riprova
+        scannerNum.nextLine();
         continue;
+
+        // scanner is closed
+      } catch (IllegalStateException e) {
+        System.out.println(e.getMessage());
+        throw e;
+
+        // input is exhausted
+      } catch (NoSuchElementException e) {
+        System.out.println(e.getMessage());
+        scannerNum.close();
+        throw e;
       }
 
       // Verifica input
-      if (1 <= scelta && scelta < size) return scelta; // <--- Uscita funzione
+      if (1 <= scelta && scelta < size) {
+        return scelta; // <----------------------------- USCITA LOOP E FUNZIONE
+      }
 
+      // Inserito numero fuori range
+      System.out.println("Inserire un numero intero da 1 a " + (size - 1));
+    }
+  }
+
+  /** Menù di selezione a interi. 
+   * Crea e distrugge il suo scanner. 
+   * Polimorfo a @see #menuInt(Scanner,string[]).
+   */
+  public static int menuInt(String[] menu) throws RuntimeException {
+    // --- Verifica argomenti
+    
+    // Lunghezza array di stringhe in input
+    // Corrisponde a numero di opzioni meno uno
+    int size = menu.length;
+
+    // Verifica numero elementi del menu
+    if (size < 2) {
+      throw new RuntimeException("Elementi menu insufficienti");
+    }
+
+    // --- Corpo funzione
+
+    // Dichiarazione scanner
+    Scanner scannerNum = new Scanner(System.in);
+
+    // Scelta inserita dall'utente
+    int scelta = -1;
+
+    while (true) { // Loop continuo di selezione. uscita con selezione valida
+
+      // Stampa testo menu
+      System.out.println("   " + menu[0]);
+      for (int i = 1; i < size; i++) {
+        System.out.println(i + ". " + menu[i]);
+      }
+
+      // Accolta input utente
+      System.out.print("Scelta: ");
+
+      // Blocco try-catch per accogliere eccezioni Scanner
+      try {
+        scelta = scannerNum.nextInt();
+
+        // next token does not match the Integer regular expression, or is out of range
+      } catch (InputMismatchException e) {
+        System.out.println(e.getMessage());
+
+        // Sblocca scanner e riprova
+        scannerNum.nextLine();
+        continue;
+
+        // scanner is closed
+      } catch (IllegalStateException e) { 
+        System.out.println(e.getMessage());
+        throw e;
+
+        // input is exhausted
+      } catch (NoSuchElementException e) {
+        System.out.println(e.getMessage());
+        scannerNum.close();
+        throw e;
+      }
+
+      // Verifica input
+      if (1 <= scelta && scelta < size) {
+        break; // <------------------------------------------------ USCITA LOOP
+      }
+
+      // Inserito numero fuori range
       System.out.println("Inserire un numero da 1 a " + (size - 1));
     }
+
+    // Chiusura scanner
+    scannerNum.close();
+    return scelta;
   }
 
   /**
