@@ -195,13 +195,12 @@ public abstract class Utility {
     return scelta;
   }
 
-  /**
-   * @brief Richiesta di selezione per caratteri (case-insensitive).
+  /**@brief Richiesta di selezione per caratteri (case-insensitive).
    * @param scannerString Scanner per lettura input utente.
    * @param requestMsg Messaggio di richiesta input.
    * @param wrongInputMsg Messaggio opzionale di avvertimento per input errato. "" per omettere.
    * @param options Array di caratteri accettati per l'input. Non deve essere vuoto.
-   * @return Carattere scelto dall'utente. In caso di errore, restituisce carattere nullo ('\0').
+   * @return Carattere scelto dall'utente tra quelli disponibili.
    */
   public static char selectionByChar(
       Scanner scannerString, String requestMsg, String wrongInputMsg, char[] options) {
@@ -233,7 +232,26 @@ public abstract class Utility {
       System.out.print(options[options.length - 1] + ") ");
 
       // Input utente
-      String bufferString = scannerString.nextLine();
+      String bufferString = "";
+      // Blocco try-catch per accogliere eccezioni Scanner
+      try {
+        bufferString = scannerString.nextLine();
+
+        // no line was found
+      } catch (NoSuchElementException e) {
+        System.out.println(e.getMessage());
+
+        // Sblocca scanner e riprova
+        scannerString.nextLine();
+        continue;
+
+        // scanner is closed
+      } catch (IllegalStateException e) {
+        System.out.println(e.getMessage());
+        throw e;
+      }
+
+      
 
       bufferString.trim();
       // Una stringa vuota porta .charAt(0) a lanciare un'eccezione
@@ -250,7 +268,7 @@ public abstract class Utility {
       char selection = bufferString.charAt(0);
       for (int i = 0; i < options.length; i++) {
         if (selection == options[i]) {
-          return selection; // <--------------------- USCITA DA LOOP E FUNZIONE
+          return selection; // <---------------------- USCITA DA LOOP E FUNZIONE
         }
       }
 
@@ -261,15 +279,14 @@ public abstract class Utility {
     }
   }
 
-  /**
-   * @brief Input stringa da terminale con verifiche.
+  /**@brief Input stringa da terminale con verifiche.
    * @param scannerString Scanner per lettura stringhe.
    * @param requestMsg Messaggio di richiesta inserimento input.
-   * @param wrongInputMsg Messaggio opzionale per input non valido. "" per omettere.
+   * @param wrongInputMsg Messaggio opzionale per input non valido.
    * @param acceptNull True per accettare stringhe nulle.
    * @param acceptEmpty True per accettare stringhe vuote.
    * @param acceptBlank True per accettare stringhe di solo whitespace.
-   * @return Stringa inserita dall'utente. In caso di errore, restituisce null.
+   * @return Stringa inserita dall'utente.
    */
   public static String verifiedInputString(
       Scanner scannerString,
