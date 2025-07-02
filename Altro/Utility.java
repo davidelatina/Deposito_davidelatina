@@ -18,7 +18,17 @@ public abstract class Utility {
 
     while (true) {
 
-      scelta = menuInt(scannerNum, new String[]{"Test","Exit","selectionByChar","verifiedInputString","verifiedInputIntRange","verifiedInputDoubleRange"});
+      scelta =
+          menuInt(
+              scannerNum,
+              new String[] {
+                "Test",
+                "Exit",
+                "selectionByChar",
+                "verifiedInputString",
+                "verifiedInputIntRange",
+                "verifiedInputDoubleRange"
+              });
 
       if (scelta <= 1) {
         break;
@@ -26,17 +36,19 @@ public abstract class Utility {
 
       switch (scelta) {
         case 2: // selectionByChar
-          char sel = selectionByChar(scannerString, "qwerty", "uiop", new char[]{'a','b','c'});
+          char sel = selectionByChar(scannerString, "qwerty", "uiop", new char[] {'a', 'b', 'c'});
           break;
         case 3: // verifiedInputString
-          bufferString = verifiedInputString(scannerString, "insert string: ", "", false, false, false);
+          bufferString =
+              verifiedInputString(scannerString, "insert string: ", "", false, false, false);
           break;
         case 4: // verifiedInputIntRange
-          bufferInt = verifiedInputIntRange(0,Integer.MAX_VALUE, scannerNum, "insert int: ", "");
+          bufferInt = verifiedInputIntRange(0, Integer.MAX_VALUE, scannerNum, "insert int: ", "");
           break;
         case 5: // verifiedInputDoubleRange
-          bufferDouble = verifiedInputDoubleRange(0.0, Double.MAX_VALUE, scannerNum, "insert double: ", "");
-          break; 
+          bufferDouble =
+              verifiedInputDoubleRange(0.0, Double.MAX_VALUE, scannerNum, "insert double: ", "");
+          break;
         default: // Should be unreachable
           System.out.println("Error");
           break;
@@ -47,14 +59,15 @@ public abstract class Utility {
     scannerNum.close();
   }
 
-  /** @brief Menù di selezione a interi.
+  /**
+   * @brief Menù di selezione a interi.
    *     <p>Offre all'utente opzioni da 1 a n, in base all'array di stringhe di lunghezza n+1
    *     inserito.
    * @param scannerNum Scanner per lettura input utente.
    * @param menu Stringa contenente il nome del menu in posizione zero, e le opzioni a seguire. Deve
    *     contenere almeno 2 elementi, ma sarebbe inutile avendone meno di 3.
-   * @return Opzione scelta dall'utente: un numero compreso tra 1 e n dove n è l'ampiezza della stringa in
-   *     argomento meno uno.
+   * @return Opzione scelta dall'utente: un numero compreso tra 1 e n dove n è l'ampiezza della
+   *     stringa in argomento meno uno.
    * @throws RuntimeException per input inutilizzabile o eccezioni Scanner.
    */
   public static int menuInt(Scanner scannerNum, String[] menu) throws RuntimeException {
@@ -62,7 +75,7 @@ public abstract class Utility {
     if (scannerNum == null) {
       return menuInt(menu);
     }
-  
+
     // Lunghezza array di stringhe in input
     // Corrisponde a numero di opzioni meno uno
     int size = menu.length;
@@ -122,13 +135,13 @@ public abstract class Utility {
     }
   }
 
-  /** Menù di selezione a interi. 
-   * Crea e distrugge il suo scanner. 
-   * Polimorfo a @see #menuInt(Scanner,string[]).
+  /**
+   * Menù di selezione a interi. Crea e distrugge il suo scanner. Polimorfo a @see
+   * #menuInt(Scanner,string[]).
    */
   public static int menuInt(String[] menu) throws RuntimeException {
     // --- Verifica argomenti
-    
+
     // Lunghezza array di stringhe in input
     // Corrisponde a numero di opzioni meno uno
     int size = menu.length;
@@ -170,7 +183,7 @@ public abstract class Utility {
         continue;
 
         // scanner is closed
-      } catch (IllegalStateException e) { 
+      } catch (IllegalStateException e) {
         System.out.println(e.getMessage());
         throw e;
 
@@ -195,7 +208,8 @@ public abstract class Utility {
     return scelta;
   }
 
-  /**@brief Richiesta di selezione per caratteri (case-insensitive).
+  /**
+   * @brief Richiesta di selezione per caratteri (case-insensitive).
    * @param scannerString Scanner per lettura input utente.
    * @param requestMsg Messaggio di richiesta input.
    * @param wrongInputMsg Messaggio opzionale di avvertimento per input errato. "" per omettere.
@@ -251,8 +265,6 @@ public abstract class Utility {
         throw e;
       }
 
-      
-
       bufferString.trim();
       // Una stringa vuota porta .charAt(0) a lanciare un'eccezione
       if (bufferString.isEmpty()) {
@@ -279,7 +291,8 @@ public abstract class Utility {
     }
   }
 
-  /**@brief Input stringa da terminale con verifiche.
+  /**
+   * @brief Input stringa da terminale con verifiche.
    * @param scannerString Scanner per lettura stringhe.
    * @param requestMsg Messaggio di richiesta inserimento input.
    * @param wrongInputMsg Messaggio opzionale per input non valido.
