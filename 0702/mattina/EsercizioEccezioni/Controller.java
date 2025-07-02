@@ -1,4 +1,4 @@
-package EsercizioEccezioni;
+package mattina.EsercizioEccezioni;
 
 class NumeroNegativoException extends Exception {
   public NumeroNegativoException (String message, Throwable cause) {

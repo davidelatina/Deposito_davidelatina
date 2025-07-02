@@ -1,4 +1,4 @@
-package EsercizioEccezioni;
+package mattina.EsercizioEccezioni;
 
 import java.util.Scanner;
 
