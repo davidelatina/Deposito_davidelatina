@@ -5,7 +5,7 @@ public class EsempioEccezioni4 {
       z = x / y;
     } catch (ArithmeticException ex) {
       // Eccezioni dentro eccezioni
-      throw new RuntimeException("Ildividendo non può essere uguale a 0", ex);
+      throw new RuntimeException("Il dividendo non può essere uguale a 0", ex);
     }
     return z;
   }
