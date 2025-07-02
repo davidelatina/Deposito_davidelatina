@@ -37,7 +37,14 @@ public class Utility {
       }
       // Accolta input utente
       System.out.print("Scelta: ");
-      scelta = scannerNum.nextInt();
+      try {
+        scelta = scannerNum.nextInt();
+      } catch (Exception e) {
+        // e.printStackTrace();
+        System.out.println(e.getMessage());
+        scannerNum.nextLine(); // Sblocca scanner
+        continue;
+      }
 
       // Verifica input
       if (1 <= scelta && scelta < size) return scelta; // <--- Uscita funzione
@@ -173,8 +180,15 @@ public class Utility {
     // --- Corpo funzione
     while (true) { // Loop continua fino a input corretto utente.
       System.out.print(requestMsg);
-
-      int bufferNum = scannerNum.nextInt();
+      int bufferNum;
+      try {
+        bufferNum = scannerNum.nextInt();
+      } catch (Exception e) {
+        e.printStackTrace();
+        System.out.println(e.getMessage());
+        scannerNum.nextLine(); // Sblocca scanner
+        continue;
+      }
 
       // Verifica input
       if (min <= bufferNum && bufferNum <= max) {
