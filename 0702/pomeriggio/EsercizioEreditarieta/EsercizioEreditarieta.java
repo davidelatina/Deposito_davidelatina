@@ -42,7 +42,7 @@ public class EsercizioEreditarieta {
         new Gatto("chicco", 4)};
 
     // Stampa animali fattoria
-    System.out.println("Animali del:");
+    System.out.println("Animali della fattoria:");
     for (Animale animale : animaliFattoria) {
       System.out.print(animale.nome + ", " + animale.eta + " anni.");
       animale.faiVerso();
