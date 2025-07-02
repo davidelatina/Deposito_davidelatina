@@ -1,3 +1,5 @@
+package mattina;
+
 public class EsempioEccezioni {
   public static void main(String[] args) {
     try {

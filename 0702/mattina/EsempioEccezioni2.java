@@ -1,3 +1,5 @@
+package mattina;
+
 import java.util.Scanner;
 
 public class EsempioEccezioni2 {

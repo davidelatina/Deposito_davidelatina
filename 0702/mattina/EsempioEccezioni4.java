@@ -1,3 +1,5 @@
+package mattina;
+
 public class EsempioEccezioni4 {
   public static int divisione(int x, int y) throws Exception {
     int z = 0;

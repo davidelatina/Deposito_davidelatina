@@ -1,3 +1,5 @@
+package mattina;
+
 public class StringValidator {
   public static void check(String s) throws TooShortStringException {
     if (s.length() < 8) {

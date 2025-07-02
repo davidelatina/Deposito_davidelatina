@@ -1,3 +1,5 @@
+package mattina;
+
 public class TooShortStringException extends Exception {
 
   public TooShortStringException(String message) {
