@@ -2,8 +2,6 @@ package pomeriggio.EsercizioHotel;
 
 import java.util.ArrayList;
 
-import javax.sound.sampled.SourceDataLine;
-
 /*
 Esercizio: Gestione Semplice di un Hotel
   Obiettivi:
@@ -35,24 +33,18 @@ Traccia
     Stampa l’output.
  */
 
-
-
 public class GestioneHotel {
   public static void main(String[] args) {
-    
-
-
 
     // Crea un hotel
     Hotel myHotel = new Hotel("myHotel");
 
+    // Aggiungi 2 camere normali e 2 suite
+    myHotel.aggiungiCamera(100.0f);
+    myHotel.aggiungiCamera(100.0f);
 
-    // aggiungi 2 camere normali e 2 suite
-    myHotel.aggiungiCamera(1, 100);
-    myHotel.aggiungiCamera(2, 100);
-
-    myHotel.aggiungiCamera(3, 200, "Servizio in camera");
-    myHotel.aggiungiCamera(4, 200, "Servizio in camera");
+    myHotel.aggiungiCamera(200.0f, "Servizio in camera");
+    myHotel.aggiungiCamera(200.0f, "Servizio in camera");
 
     // Usa il metodo statico per contare quante suite ci sono
     Hotel.contaSuite(myHotel.camere);
@@ -68,25 +60,26 @@ public class GestioneHotel {
       camera.dettagli(true);
     }
   }
-  
 }
 
 class Hotel {
+  // Variabili d'istanza
+  int numeroCamere = 0;
   String nome;
-  int numeroCamere;
   ArrayList<Camera> camere = new ArrayList<>();
 
   Hotel(String nome) {
     this.nome = nome;
   }
 
-  
-  void aggiungiCamera(int numero, float prezzo) {
-    this.camere.add(new Camera(numero, prezzo));
+  void aggiungiCamera(float prezzo) {
+    numeroCamere++;
+    this.camere.add(new Camera(numeroCamere, prezzo));
   }
 
-  void aggiungiCamera(int numero, float prezzo, String serviziExtra) {
-    this.camere.add(new Suite(numero, prezzo, serviziExtra));
+  void aggiungiCamera(float prezzo, String serviziExtra) {
+    numeroCamere++;
+    this.camere.add(new Suite(numeroCamere, prezzo, serviziExtra));
   }
 
   static void contaSuite(ArrayList<Camera> camere) {
@@ -101,7 +94,6 @@ class Hotel {
     }
     System.out.println("Ci sono " + c + " camere e " + s + " suite.");
   }
-
 }
 
 class Suite extends Camera {
@@ -120,7 +112,6 @@ class Suite extends Camera {
     this.serviziExtra = serviziExtra;
   }
 
-
   @Override
   void dettagli() {
     super.dettagli();
@@ -137,8 +128,6 @@ class Camera {
     this.prezzo = prezzo;
   }
 
-  
-
   // Getters e setters
   public int getNumero() {
     return numero;
@@ -147,7 +136,7 @@ class Camera {
   public void setNumero(int numero) {
     this.numero = numero;
   }
-  
+
   public float getPrezzo() {
     return prezzo;
   }
@@ -160,6 +149,7 @@ class Camera {
   void dettagli() {
     System.out.println("Camera n. " + numero + ", € " + prezzo + " a notte");
   }
+
   // Con prezzo
   void dettagli(boolean conPrezzo) {
     if (conPrezzo) {
