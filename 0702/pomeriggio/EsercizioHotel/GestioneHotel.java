@@ -50,17 +50,17 @@ public class GestioneHotel {
       myHotel.aggiungiCamera(300.0f, "Servizio in camera");
 
       // Solo eccezione prezzo
-    } catch (PriceNegativeException e) { 
+    } catch (PriceNegativeException e) {
 
       System.out.println(e.getMessage());
       System.out.println("Errore previsto. Inserire nuovamente prezzo");
-      
+
       // Ogni altra eccezione
-    } catch (Exception e) { 
+    } catch (Exception e) {
       System.out.println("Errore inaspettato. Esecuzione interrotta");
       System.out.println(e.getMessage());
       e.printStackTrace();
-      
+
       // Uscita dal programma
       return;
     }
@@ -79,17 +79,14 @@ public class GestioneHotel {
       camera.dettagli(true);
     }
   }
-
-
-
-
 }
 
 class PriceNegativeException extends RuntimeException {
   PriceNegativeException(String msg) {
     super(msg);
   }
-};
+}
+;
 
 class Hotel {
   // Variabili d'istanza
@@ -105,7 +102,8 @@ class Hotel {
   void aggiungiCamera(float prezzo) throws PriceNegativeException {
     // --- Verifica argomenti
     if (prezzo < 0.0) {
-      throw new PriceNegativeException("Il costo per notte delle camere deve essere maggiore di zero.");
+      throw new PriceNegativeException(
+          "Il costo per notte delle camere deve essere maggiore di zero.");
     }
 
     // --- Corpo funzione
@@ -117,7 +115,8 @@ class Hotel {
   void aggiungiCamera(float prezzo, String serviziExtra) throws PriceNegativeException {
     // --- Verifica argomenti
     if (prezzo < 0.0) {
-      throw new PriceNegativeException("Il costo per notte delle camere deve essere maggiore di zero.");
+      throw new PriceNegativeException(
+          "Il costo per notte delle camere deve essere maggiore di zero.");
     }
     if (serviziExtra.trim().isBlank()) {
       // Senza servizi extra, non è una suite ma solo una camera
@@ -129,7 +128,6 @@ class Hotel {
     numeroCamere++;
     this.camere.add(new Suite(numeroCamere, prezzo, serviziExtra));
   }
-
 
   // Metodi statici
   static void contaSuite(ArrayList<Camera> camere) {
