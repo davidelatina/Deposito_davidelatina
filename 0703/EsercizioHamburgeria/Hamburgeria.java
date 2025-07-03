@@ -99,7 +99,7 @@ public class Hamburgeria {
                 break;
               }
             }
-            //ingredienti.add(new HamburgerPersonalizzato(ingredienti));
+            ingredienti.add(bufferStr);
           }
           ordine.add(new HamburgerPersonalizzato(ingredienti));
           break;
@@ -262,6 +262,7 @@ class HamburgerPersonalizzato extends Hamburger {
     for (String string : this.ingredienti) {
       System.out.print(string + ", ");
     }
+    System.out.println("");
   }
   
   @Override
