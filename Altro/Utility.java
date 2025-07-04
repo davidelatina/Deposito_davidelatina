@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -10,6 +11,11 @@ public abstract class Utility {
     Scanner scannerString = new Scanner(System.in);
 
     int scelta = -1;
+
+    ArrayList<String> menuDinamico = new ArrayList<>();
+    menuDinamico.add("Menu dinamico");
+    menuDinamico.add("Esci");
+    menuDinamico.add("Aggiungi opzione");
 
     // Valori in lettura
     String bufferString = "";
@@ -27,7 +33,8 @@ public abstract class Utility {
                 "selectionByChar",
                 "verifiedInputString",
                 "verifiedInputIntRange",
-                "verifiedInputDoubleRange"
+                "verifiedInputDoubleRange",
+                "Dynamic menu"
               });
 
       if (scelta <= 1) {
@@ -38,16 +45,30 @@ public abstract class Utility {
         case 2: // selectionByChar
           char sel = selectionByChar(scannerString, "qwerty", "uiop", new char[] {'a', 'b', 'c'});
           break;
+
         case 3: // verifiedInputString
           bufferString =
               verifiedInputString(scannerString, "insert string: ", "", false, false, false);
           break;
+
         case 4: // verifiedInputIntRange
           bufferInt = verifiedInputIntRange(0, Integer.MAX_VALUE, scannerNum, "insert int: ", "");
           break;
+
         case 5: // verifiedInputDoubleRange
           bufferDouble =
               verifiedInputDoubleRange(0.0, Double.MAX_VALUE, scannerNum, "insert double: ", "");
+          break;
+
+        case 6: // dynamic menu
+          while (true) {
+            scelta = dynamicMenu(scannerNum, menuDinamico, false);
+            if (scelta == 1) {
+              break;
+            } else if (scelta == 2) {
+              menuDinamico.add("Scelta vuota");
+            }
+          }
           break;
         default: // Should be unreachable
           System.out.println("Error");
@@ -58,6 +79,97 @@ public abstract class Utility {
     scannerString.close();
     scannerNum.close();
   }
+
+/**
+ * @brief Menù dinamico di selezione a interi.
+ *        <p>
+ *        Offre all'utente opzioni da 1 a n (o da 0 a n-1), in base all'array di stringhe di lunghezza n+1 inserito.
+ * @param scanNum  oggetto Scanner adibito a leggere numeri
+ * @param menu          ArrayList di stringhe contenente il nome del menu in
+ *                      posizione zero, e le opzioni a seguire.
+ * @param startFromZero Indica alla funzione se il menu debba partire da zero.
+ * @return Opzione scelta dall'utente: un numero compreso tra 1 e n dove n è
+ *         l'ampiezza della stringa in argomento meno uno, OPPURE un numero
+ *         compreso tra 0 e n-1 se @see startFromZero è impostato su true.
+ * @throws RuntimeException per eccezioni Scanner.
+ */
+  public static int dynamicMenu(Scanner scanNum, ArrayList<String> menu, boolean startFromZero) throws RuntimeException {
+    
+    // --- Verifica argomenti
+
+    // Lunghezza array di stringhe in input
+    // Corrisponde a numero di opzioni meno uno
+    int size = menu.size();
+
+    // Verifica numero elementi del menu
+    if (size < 2) {
+      throw new RuntimeException("Elementi menu insufficienti");
+    }
+
+    //Scanner scanNum = new Scanner(System.in);
+
+
+    // --- Corpo funzione
+
+    // Scelta inserita dall'utente
+    int scelta = -1;
+
+    while (true) { // Loop continuo di selezione. uscita con selezione valida
+
+      // Stampa testo menu
+      System.out.println("   " + menu.get(0));
+      for (int i = 1; i < size; i++) {
+
+        // Stampa numero menu
+        if (startFromZero) {
+          System.out.print(i-1);
+        } else {
+          System.out.print(i);
+        }
+
+        // Resto della riga, con nome dell'opzione
+        System.out.println(". " + menu.get(i));
+      }
+
+      // Accolta input utente
+      System.out.print("Scelta: ");
+
+      // Blocco try-catch per accogliere eccezioni Scanner
+      try {
+        scelta = scanNum.nextInt();
+
+        // next token does not match the Integer regular expression, or is out of range
+      } catch (InputMismatchException e) {
+
+        // Inserito un non numero o non intero
+        System.out.println("Inserire un numero intero da 1 a " + (size - 1));
+
+        // Sblocca scanner e riprova
+        scanNum.nextLine();
+        continue;
+
+        // scanner is closed
+      } catch (IllegalStateException e) {
+        System.out.println(e.getMessage());
+        throw e;
+
+        // input is exhausted
+      } catch (NoSuchElementException e) {
+        System.out.println(e.getMessage());
+        scanNum.close();
+        throw e;
+      }
+
+      // Verifica input
+      if (1 <= scelta && scelta < size) {
+        return scelta; // <----------------------------- USCITA LOOP E FUNZIONE
+      }
+
+      // Inserito numero fuori range
+      System.out.println("Inserire un numero intero da 1 a " + (size - 1));
+    }
+  }
+
 
   /**
    * @brief Menù di selezione a interi.
