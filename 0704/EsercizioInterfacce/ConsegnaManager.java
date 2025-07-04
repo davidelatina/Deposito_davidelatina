@@ -91,21 +91,21 @@ public class ConsegnaManager {
 
     destinazione = verifiedInputString(scannerStr, "Consegnare dove? ", "", false, false, false);
 
-    VeicoloConsegna veicolo;
     if (scelta == 1) {
+      Furgone veicolo;
       veicolo = new Furgone(targa, bufferFloat);
       veicolo.tracciaConsegna("bbbb");
+      flotta.add(veicolo);
+      veicolo.consegnaPacco(destinazione);
     } else {
+      Drone veicolo;
       veicolo = new Drone(targa, bufferFloat);
       veicolo.tracciaConsegna("aaaa");
+      flotta.add(veicolo);
+      veicolo.consegnaPacco(destinazione);
     }
-    flotta.add(veicolo);
-
-    
-    // consegna
-    
-    
-    veicolo.consegnaPacco(destinazione);
+ 
+  
     
 
 /*
@@ -337,6 +337,7 @@ class Furgone extends VeicoloConsegna implements Tracciabile {
   Furgone(String targa, float caricoMassimo) {
     this.targa = targa;
     this.caricoMassimo = caricoMassimo;
+    this.tracking = "bbbb";
   }
 
   // stampa che sta consegnando via strada con targa e destinazione
@@ -348,10 +349,7 @@ class Furgone extends VeicoloConsegna implements Tracciabile {
 
   void consegnaPacco(String destinazione) {
     System.out.println("Il furgone targa " + targa + " sta consegnando via strada a " + destinazione);
-
-    this.tracking = "bbbb";
-
-    System.out.println("Codice tracking: " + tracking);
+    System.out.println("Codice tracking: " + this.tracking);
   }
   
 
@@ -362,16 +360,14 @@ class Drone extends VeicoloConsegna implements Tracciabile {
   Drone(String targa, float caricoMassimo) {
     this.targa = targa;
     this.caricoMassimo = caricoMassimo;
+    this.tracking = "aaaa";
   }
 
   // stampa che sta volando verso la destinazione e fornisce un tracking
   // automatico
   void consegnaPacco(String destinazione) {
     System.out.println("Il drone con id " + targa + " sta consegnando via strada a " + destinazione);
-
-    this.tracking = "aaaa";
-
-    System.out.println("Codice tracking: " + tracking);
+    System.out.println("Codice tracking: " + this.tracking);
 
   } 
 
