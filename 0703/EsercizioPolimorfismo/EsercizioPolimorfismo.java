@@ -13,7 +13,7 @@ public class EsercizioPolimorfismo {
 }
 
 class Persona {
-  String nome;
+  protected String nome;
 
   Persona(String nome) {
     this.nome = nome;
