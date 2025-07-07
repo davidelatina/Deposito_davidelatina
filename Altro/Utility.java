@@ -24,18 +24,17 @@ public abstract class Utility {
 
     while (true) {
 
-      scelta =
-          menuInt(
-              scannerNum,
-              new String[] {
-                "Test",
-                "Exit",
-                "selectionByChar",
-                "verifiedInputString",
-                "verifiedInputIntRange",
-                "verifiedInputDoubleRange",
-                "Dynamic menu"
-              });
+      scelta = menuInt(
+          scannerNum,
+          new String[] {
+              "Test",
+              "Exit",
+              "selectionByChar",
+              "verifiedInputString",
+              "verifiedInputIntRange",
+              "verifiedInputDoubleRange",
+              "Dynamic menu"
+          });
 
       if (scelta <= 1) {
         break;
@@ -43,12 +42,11 @@ public abstract class Utility {
 
       switch (scelta) {
         case 2: // selectionByChar
-          char sel = selectionByChar(scannerString, "qwerty", "uiop", new char[] {'a', 'b', 'c'});
+          char sel = selectionByChar(scannerString, "qwerty", "uiop", new char[] { 'a', 'b', 'c' });
           break;
 
         case 3: // verifiedInputString
-          bufferString =
-              verifiedInputString(scannerString, "insert string: ", "", false, false, false);
+          bufferString = verifiedInputString(scannerString, "insert string: ", "", false, false, false);
           break;
 
         case 4: // verifiedInputIntRange
@@ -56,8 +54,7 @@ public abstract class Utility {
           break;
 
         case 5: // verifiedInputDoubleRange
-          bufferDouble =
-              verifiedInputDoubleRange(0.0, Double.MAX_VALUE, scannerNum, "insert double: ", "");
+          bufferDouble = verifiedInputDoubleRange(0.0, Double.MAX_VALUE, scannerNum, "insert double: ", "");
           break;
 
         case 6: // dynamic menu
@@ -80,21 +77,23 @@ public abstract class Utility {
     scannerNum.close();
   }
 
-/**
- * @brief Menù dinamico di selezione a interi.
- *        <p>
- *        Offre all'utente opzioni da 1 a n (o da 0 a n-1), in base all'array di stringhe di lunghezza n+1 inserito.
- * @param scanNum  oggetto Scanner adibito a leggere numeri
- * @param menu          ArrayList di stringhe contenente il nome del menu in
- *                      posizione zero, e le opzioni a seguire.
- * @param startFromZero Indica alla funzione se il menu debba partire da zero.
- * @return Opzione scelta dall'utente: un numero compreso tra 1 e n dove n è
- *         l'ampiezza della stringa in argomento meno uno, OPPURE un numero
- *         compreso tra 0 e n-1 se @see startFromZero è impostato su true.
- * @throws RuntimeException per eccezioni Scanner.
- */
-  public static int dynamicMenu(Scanner scanNum, ArrayList<String> menu, boolean startFromZero) throws RuntimeException {
-    
+  /**
+   * @brief Menù dinamico di selezione a interi.
+   *        <p>
+   *        Offre all'utente opzioni da 1 a n (o da 0 a n-1), in base all'array di
+   *        stringhe di lunghezza n+1 inserito.
+   * @param scanNum       oggetto Scanner adibito a leggere numeri
+   * @param menu          ArrayList di stringhe contenente il nome del menu in
+   *                      posizione zero, e le opzioni a seguire.
+   * @param startFromZero Indica alla funzione se il menu debba partire da zero.
+   * @return Opzione scelta dall'utente: un numero compreso tra 1 e n dove n è
+   *         l'ampiezza della stringa in argomento meno uno, OPPURE un numero
+   *         compreso tra 0 e n-1 se @see startFromZero è impostato su true.
+   * @throws RuntimeException per eccezioni Scanner.
+   */
+  public static int dynamicMenu(Scanner scanNum, ArrayList<String> menu, boolean startFromZero)
+      throws RuntimeException {
+
     // --- Verifica argomenti
 
     // Lunghezza array di stringhe in input
@@ -106,8 +105,7 @@ public abstract class Utility {
       throw new RuntimeException("Elementi menu insufficienti");
     }
 
-    //Scanner scanNum = new Scanner(System.in);
-
+    // Scanner scanNum = new Scanner(System.in);
 
     // --- Corpo funzione
 
@@ -121,11 +119,7 @@ public abstract class Utility {
       for (int i = 1; i < size; i++) {
 
         // Stampa numero menu
-        if (startFromZero) {
-          System.out.print(i-1);
-        } else {
-          System.out.print(i);
-        }
+        System.out.print((startFromZero? i - 1 : i));
 
         // Resto della riga, con nome dell'opzione
         System.out.println(". " + menu.get(i));
@@ -142,7 +136,9 @@ public abstract class Utility {
       } catch (InputMismatchException e) {
 
         // Inserito un non numero o non intero
-        System.out.println("Inserire un numero intero da 1 a " + (size - 1));
+        System.out.println("Inserire un numero intero da " +
+            (startFromZero? "0" : "1") + " a " + 
+            (startFromZero? (size - 2) : (size - 1)));
 
         // Sblocca scanner e riprova
         scanNum.nextLine();
@@ -166,20 +162,26 @@ public abstract class Utility {
       }
 
       // Inserito numero fuori range
-      System.out.println("Inserire un numero intero da 1 a " + (size - 1));
+      System.out.println("Inserire un numero intero da " +
+          (startFromZero ? "0" : "1") + " a " +
+          (startFromZero ? (size - 2) : (size - 1)));
     }
   }
 
-
   /**
    * @brief Menù di selezione a interi.
-   *     <p>Offre all'utente opzioni da 1 a n, in base all'array di stringhe di lunghezza n+1
-   *     inserito.
+   *        <p>
+   *        Offre all'utente opzioni da 1 a n, in base all'array di stringhe di
+   *        lunghezza n+1
+   *        inserito.
    * @param scannerNum Scanner per lettura input utente.
-   * @param menu Stringa contenente il nome del menu in posizione zero, e le opzioni a seguire. Deve
-   *     contenere almeno 2 elementi, ma sarebbe inutile avendone meno di 3.
-   * @return Opzione scelta dall'utente: un numero compreso tra 1 e n dove n è l'ampiezza della
-   *     stringa in argomento meno uno.
+   * @param menu       Stringa contenente il nome del menu in posizione zero, e le
+   *                   opzioni a seguire. Deve
+   *                   contenere almeno 2 elementi, ma sarebbe inutile avendone
+   *                   meno di 3.
+   * @return Opzione scelta dall'utente: un numero compreso tra 1 e n dove n è
+   *         l'ampiezza della
+   *         stringa in argomento meno uno.
    * @throws RuntimeException per input inutilizzabile o eccezioni Scanner.
    */
   public static int menuInt(Scanner scannerNum, String[] menu) throws RuntimeException {
@@ -323,9 +325,11 @@ public abstract class Utility {
   /**
    * @brief Richiesta di selezione per caratteri (case-insensitive).
    * @param scannerString Scanner per lettura input utente.
-   * @param requestMsg Messaggio di richiesta input.
-   * @param wrongInputMsg Messaggio opzionale di avvertimento per input errato. "" per omettere.
-   * @param options Array di caratteri accettati per l'input. Non deve essere vuoto.
+   * @param requestMsg    Messaggio di richiesta input.
+   * @param wrongInputMsg Messaggio opzionale di avvertimento per input errato. ""
+   *                      per omettere.
+   * @param options       Array di caratteri accettati per l'input. Non deve
+   *                      essere vuoto.
    * @return Carattere scelto dall'utente tra quelli disponibili.
    */
   public static char selectionByChar(
@@ -348,7 +352,7 @@ public abstract class Utility {
     while (true) { // Loop continua fino a input corretto utente.
 
       // Richiesta all'utente in formato
-      //    requestMsg (a/b/c/d)
+      // requestMsg (a/b/c/d)
       System.out.print(requestMsg);
 
       System.out.print(" (");
@@ -406,11 +410,11 @@ public abstract class Utility {
   /**
    * @brief Input stringa da terminale con verifiche.
    * @param scannerString Scanner per lettura stringhe.
-   * @param requestMsg Messaggio di richiesta inserimento input.
+   * @param requestMsg    Messaggio di richiesta inserimento input.
    * @param wrongInputMsg Messaggio opzionale per input non valido.
-   * @param acceptNull True per accettare stringhe nulle.
-   * @param acceptEmpty True per accettare stringhe vuote.
-   * @param acceptBlank True per accettare stringhe di solo whitespace.
+   * @param acceptNull    True per accettare stringhe nulle.
+   * @param acceptEmpty   True per accettare stringhe vuote.
+   * @param acceptBlank   True per accettare stringhe di solo whitespace.
    * @return Stringa inserita dall'utente.
    */
   public static String verifiedInputString(
