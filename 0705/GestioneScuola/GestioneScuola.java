@@ -178,23 +178,23 @@ public class GestioneScuola {
         case 2: // Aggiungi studente:
           bufferNome = verifiedInputString(scannerString, "Inserire nome studente: ", "", false, false, false);
 
-          bufferInt = verifiedInputIntRange(0, Integer.MAX_VALUE, scannerNum, "Inserire età: ", "Inserire valore positivo.");
+          bufferInt = verifiedInputIntRange(0, Integer.MAX_VALUE, scannerNum, "Inserire età: ",
+              "Inserire valore positivo.");
 
           bufferMateria = verifiedInputString(scannerString, "Inserire materia: ", "", false, false, false);
-
 
           myScuola.addStudente(new Studente(bufferNome, bufferInt, bufferMateria));
           break;
 
         case 3: // Aggiungi docente
-          bufferNome = verifiedInputString(scannerString, "Inserire nome docente: ",  "", false, false, false);
+          bufferNome = verifiedInputString(scannerString, "Inserire nome docente: ", "", false, false, false);
 
-          bufferInt = verifiedInputIntRange(18, Integer.MAX_VALUE, scannerNum,   "Inserire età: ",
+          bufferInt = verifiedInputIntRange(18, Integer.MAX_VALUE, scannerNum, "Inserire età: ",
               "Deve avere almeno 18 anni per insegnare.");
 
           bufferMateria = verifiedInputString(scannerString, "Inserire materia: ", "", false, false, false);
           myScuola.addDocente(new Docente(bufferNome, bufferInt, bufferMateria));
-         break;
+          break;
 
         case 4: // Stampa
           myScuola.stampa();
@@ -205,7 +205,6 @@ public class GestioneScuola {
           break;
       }
     }
-
 
     scannerString.close();
     scannerNum.close();
@@ -301,7 +300,7 @@ public class GestioneScuola {
           (startFromZero ? (size - 2) : (size - 1)));
     }
   }
-  
+
   /**
    * @brief Input stringa da terminale con verifiche.
    * @param scannerString Scanner per lettura stringhe.
