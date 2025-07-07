@@ -50,7 +50,7 @@ abstract class Persona {
   private String nome;
   private int eta;
 
-  public Persona(String nome, int eta) {
+  Persona(String nome, int eta) {
     this.nome = nome;
     this.eta = eta;
   }
@@ -72,12 +72,9 @@ abstract class Persona {
   }
 
   abstract void descriviRuolo();
-
-  abstract void registrazione();
 }
 
 interface Registrabile {
-  void descriviRuolo();
 
   void registrazione();
 }
@@ -94,7 +91,7 @@ class Studente extends Persona implements Registrabile {
     this.classeFrequentata = classeFrequentata;
   }
 
-  public Studente(String nome, int eta, String classeFrequentata) {
+  Studente(String nome, int eta, String classeFrequentata) {
     super(nome, eta);
     this.classeFrequentata = classeFrequentata;
   }
@@ -421,13 +418,11 @@ class Scuola {
 
   public void stampa() {
 
-    /*for (Registrabile r : persone) {
-      
-    } */
-
     for (Persona persona : persone) {
       persona.descriviRuolo();
-      persona.registrazione();
+      if (persona instanceof Registrabile) {
+        ((Registrabile) persona).registrazione();
+      }
       System.out.println();
     }
   }
