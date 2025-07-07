@@ -31,8 +31,8 @@ public class ESSingleton {
     Logger_singleton log2 = Logger_singleton.getInstance();
     log2.log("Fine programma");
 
-    // Sono la stessa istanza
-    if (log1.equals(log2)) {
+    // Sono esattamente la stessa istanza
+    if (log1 == log2) {
       System.out.println("Conferma: logger1 e logger2 sono la stessa istanza.");
     } else {
       System.out.println("Errore: le istanze non coincidono.");

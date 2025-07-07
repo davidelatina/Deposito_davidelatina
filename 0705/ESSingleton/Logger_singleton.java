@@ -29,7 +29,6 @@ public class Logger_singleton {
     System.out.println("[LOG] " + "[" + dataOra + "] " + msg);
   }
 
-
   // Override di .finalize()
   @Override
   protected void finalize() throws Throwable {
