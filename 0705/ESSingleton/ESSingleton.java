@@ -38,5 +38,12 @@ public class ESSingleton {
       System.out.println("Errore: le istanze non coincidono.");
     }
 
+    // Rimozione riferimenti
+    log1 = null;
+    log2 = null;
+
+    // Chiamiamo il garbage collector (non garantito che venga chiamato
+    // immediatamente)
+    System.gc(); // Suggerisce al garbage collector di eseguire la pulizia
   }
 }

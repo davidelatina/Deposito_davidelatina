@@ -28,4 +28,12 @@ public class Logger_singleton {
 
     System.out.println("[LOG] " + "[" + dataOra + "] " + msg);
   }
+
+
+  // Override di .finalize()
+  @Override
+  protected void finalize() throws Throwable {
+    System.out.println("Oggetto " + this + " in fase di garbage collection.");
+    super.finalize();
+  }
 }
