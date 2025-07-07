@@ -119,7 +119,7 @@ public abstract class Utility {
       for (int i = 1; i < size; i++) {
 
         // Stampa numero menu
-        System.out.print((startFromZero? i - 1 : i));
+        System.out.print((startFromZero ? i - 1 : i));
 
         // Resto della riga, con nome dell'opzione
         System.out.println(". " + menu.get(i));
@@ -137,8 +137,8 @@ public abstract class Utility {
 
         // Inserito un non numero o non intero
         System.out.println("Inserire un numero intero da " +
-            (startFromZero? "0" : "1") + " a " + 
-            (startFromZero? (size - 2) : (size - 1)));
+            (startFromZero ? "0" : "1") + " a " +
+            (startFromZero ? (size - 2) : (size - 1)));
 
         // Sblocca scanner e riprova
         scanNum.nextLine();
