@@ -3,7 +3,7 @@ package MenuInput;
 import java.util.*;
 
 /**
- * @brief Classe utility. Da non istanziare nè ereditare.
+ * @brief Classe utility per creazione menu e input utente da terminale. Da non istanziare nè ereditare.
  * 
  */
 public final class MenuInput {

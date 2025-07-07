@@ -47,18 +47,39 @@ public abstract class Utility {
       switch (scelta) {
         case 2: // selectionByChar
           char sel = MenuInput.selectionByChar(scannerString, "qwerty", "uiop", new char[] { 'a', 'b', 'c' });
+
+          // esempio di verifica eseguita esternamente
+          if (ValidatorExample.isVowel(sel)) {
+            System.out.println(sel + " + una vocale");
+          } else {
+            System.out.println(sel + " + non è una vocale");
+          }
           break;
 
         case 3: // verifiedInputString
-          bufferString = MenuInput.verifiedInputString(scannerString, "insert string: ", "", false, false, false);
+          bufferString = MenuInput.verifiedInputString(scannerString, "insert string: ", "insert a valid string", false, false, false);
           break;
 
         case 4: // verifiedInputIntRange
-          bufferInt = MenuInput.verifiedInputIntRange(0, Integer.MAX_VALUE, scannerNum, "insert int: ", "");
+          bufferInt = MenuInput.verifiedInputIntRange(0, Integer.MAX_VALUE, scannerNum, "insert int: ", "insert a valid int");
+
+          // esempio di verifica eseguita esternamente
+          if (ValidatorExample.greaterThanZero(bufferInt)) {
+            System.out.println(bufferInt + " è maggiore di zero");
+          } else {
+            System.out.println(bufferInt + " non è maggiore di zero");
+          }
           break;
 
         case 5: // verifiedInputDoubleRange
-          bufferDouble = MenuInput.verifiedInputDoubleRange(0.0, Double.MAX_VALUE, scannerNum, "insert double: ", "");
+          bufferDouble = MenuInput.verifiedInputDoubleRange(0.0, Double.MAX_VALUE, scannerNum, "insert double: ", "insert a valid double");
+
+          // esempio di verifica eseguita esternamente
+          if (ValidatorExample.greaterThanZero(bufferDouble)) {
+            System.out.println(bufferDouble + " è maggiore di zero");
+          } else {
+            System.out.println(bufferDouble + " non è maggiore di zero");
+          }
           break;
 
         case 6: // dynamic menu
@@ -71,6 +92,7 @@ public abstract class Utility {
             }
           }
           break;
+
         default: // Should be unreachable
           System.out.println("Error");
           break;
