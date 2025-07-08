@@ -97,8 +97,7 @@ public class MainBorsa {
      this.name = name;
    }
     public void notifica(String azione, double valore) {
-      
-      System.out.println(this.name + " ha ricevuto aggiornamento: " + azione + " a € " + valore);
+      Logger_singleton.getInstance().log(this.toString() + " " + this.name + " ha ricevuto aggiornamento: " + azione + " a € " + valore);
     }
  }
 
