@@ -55,6 +55,9 @@ class ConcreteSubject implements Subject {
   }
 
   public void notifyObservers() {
+    if (observers.isEmpty()) {
+      return;
+    }
     for (Observer o : observers) {
       o.update(state);
     }
