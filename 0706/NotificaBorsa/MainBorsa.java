@@ -17,8 +17,15 @@ Implementare la classe AgenziaBorsa con:
   Implementare almeno due classi Investitore, es. InvestitorePrivato e InvestitoreBancario, che rispondono con messaggi personalizzati.
 */
 
+import java.util.Scanner;
+
+import MenuInput.*;
+
 public class MainBorsa {
   public static void main(String[] args) {
+    Scanner scannerStr = new Scanner(System.in);
+    Scanner scannerNum = new Scanner(System.in);
+
     AgenziaBorsa myABorsa = new AgenziaBorsa();
 
     InvestitorePrivato myIPrivato = new InvestitorePrivato("Pippo");
@@ -27,8 +34,6 @@ public class MainBorsa {
     RicevitoreNotifiche test = new RicevitoreNotifiche("test");
     test.notifica("test", 0.0);
 
-    //ConcreteObserver test2 = new ConcreteObserver("test");
-    //test2.notifica("test2", 100.0);
 
     myIPrivato.notifica("test", 0);
 
@@ -37,6 +42,11 @@ public class MainBorsa {
 
     myABorsa.aggiornaValoreAzione("Rockerduck", 1000.0);
     myABorsa.aggiornaValoreAzione("Bassotti Enterprises", 23.0);
+
+    String azione = MenuInput.verifiedInputString(scannerStr,"Inserire nome azione: ", "", false, false, false);
+    double valore = MenuInput.verifiedInputDoubleRange(0.0, Double.MAX_VALUE, scannerNum, "Inserire valore: ", "");
+
+    myABorsa.aggiornaValoreAzione(azione, valore);
 
   }
  }
