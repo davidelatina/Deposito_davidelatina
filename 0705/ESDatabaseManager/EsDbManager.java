@@ -26,10 +26,8 @@ public class EsDbManager {
     Scanner scannerNum = new Scanner(System.in);
     Scanner scannerString = new Scanner(System.in);
 
-
     DatabaseManager_singleton db = DatabaseManager_singleton.getInstance();
     DatabaseManager_singleton db2 = DatabaseManager_singleton.getInstance();
-
 
     int scelta = -1;
 
@@ -47,7 +45,6 @@ public class EsDbManager {
       scelta = scannerNum.nextInt();
       scannerNum.nextLine(); // Smaltire newline
 
-      
       if (scelta <= 1) {
         break; // <-------------------------------------------USCITA PROGRAMMA
       }
@@ -57,7 +54,7 @@ public class EsDbManager {
 
           // Ottieni singleton
           db = DatabaseManager_singleton.getInstance();
-        
+
           // Connessione db
           db.connect();
 
@@ -99,12 +96,12 @@ public class EsDbManager {
       }
     }
 
-    
     // Chiusura scanners
     scannerString.close();
     scannerNum.close();
   }
 }
+
 class DatabaseManager_singleton {
   // Contatore numero totale connessioni
   int connectionCount = 0;
