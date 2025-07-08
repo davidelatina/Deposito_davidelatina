@@ -7,7 +7,7 @@ public class Main {
     Singleton1 singleton2 = Singleton1.getInstance(); // rimane sempre la stessa
     singleton2.doSomething();
 
-    if (singleton1.equals(singleton2)) {
+    if (singleton1 == singleton2) {
       System.out.println("Sempre lo stesso singleton.");
     }
 
