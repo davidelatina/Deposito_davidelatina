@@ -52,7 +52,7 @@ class RicevitoreNotifiche implements Investitore_observer {
     this.name = name;
   }
    public void notifica(String azione, double valore) {
-     Logger_singleton.getInstance().log(this.toString() + " " + this.name + " ha ricevuto aggiornamento: " + azione + " a € " + valore);
+     Logger_singleton.getInstance().log(this.getClass().toString() + " " + this.name + " ha ricevuto aggiornamento: " + azione + " a € " + valore);
    }
 }
 
