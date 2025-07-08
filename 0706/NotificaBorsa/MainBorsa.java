@@ -26,28 +26,27 @@ public class MainBorsa {
     Scanner scannerStr = new Scanner(System.in);
     Scanner scannerNum = new Scanner(System.in);
 
+    // Subject
     AgenziaBorsa myABorsa = new AgenziaBorsa();
 
+    // Observers
     InvestitorePrivato myIPrivato = new InvestitorePrivato("Pippo");
     InvestitoreBancario myIBancario = new InvestitoreBancario("Banca di Topolinia");
-
-    RicevitoreNotifiche test = new RicevitoreNotifiche("test");
-    test.notifica("test", 0.0);
-
-
-    myIPrivato.notifica("test", 0);
 
     myABorsa.aggiungiInvestitore(myIBancario);
     myABorsa.aggiungiInvestitore(myIPrivato);
 
+    // Update observers
     myABorsa.aggiornaValoreAzione("Rockerduck", 1000.0);
     myABorsa.aggiornaValoreAzione("Bassotti Enterprises", 23.0);
 
+    // Custom notification
     String azione = MenuInput.verifiedInputString(scannerStr,"Inserire nome azione: ", "", false, false, false);
     double valore = MenuInput.verifiedInputDoubleRange(0.0, Double.MAX_VALUE, scannerNum, "Inserire valore: ", "");
-
     myABorsa.aggiornaValoreAzione(azione, valore);
 
+    scannerNum.close();
+    scannerStr.close();
   }
  }
 
