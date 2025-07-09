@@ -25,12 +25,12 @@ public class EsercizioDecorator {
     // Decoratore
     DecoratoreMaiuscolo myDecoratoreMaiuscolo = new DecoratoreMaiuscolo(myMessaggioBase);
 
-    System.out.println("Messaggio originale: " + myMessaggioBase.getContenuto() + "\nMessaggio decorato: " + myDecoratoreMaiuscolo.getContenuto());
-   
+    System.out.println("Messaggio originale: " + myMessaggioBase.getContenuto() + "\nMessaggio decorato: "
+        + myDecoratoreMaiuscolo.getContenuto());
+
     scannerStr.close();
   }
 }
-
 
 // Interfaccia Component
 interface Messaggio {
@@ -40,9 +40,11 @@ interface Messaggio {
 // Componente Concreto
 class MessaggioBase implements Messaggio {
   String messaggio;
+
   MessaggioBase(String messaggio) {
     this.messaggio = messaggio;
   }
+
   public String getContenuto() {
     return messaggio;
   }
@@ -67,9 +69,7 @@ class DecoratoreMaiuscolo extends Decorator {
     super(component);
   }
 
-  public String getContenuto() { 
+  public String getContenuto() {
     return component.getContenuto().toUpperCase();
   }
 }
-
-
