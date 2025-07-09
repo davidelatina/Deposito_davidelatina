@@ -7,6 +7,11 @@ package ValidatorExample;
  */
 public final class ValidatorExample {
 
+  // Costruttore, non deve essere mai chiamato
+  private ValidatorExample() {
+    throw new java.lang.UnsupportedOperationException("This is a utility class and cannot be instantiated");
+  }
+
   // Numero maggiore di zero
   public static boolean greaterThanZero(int a) {
     return a > 0;
