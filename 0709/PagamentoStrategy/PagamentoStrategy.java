@@ -17,12 +17,15 @@ class CartaDiCredito_strategy implements Pagamento_strategy {
   
   public void paga(double importo) {
     System.out.println("Pagamento effettuato tramite carta di credito.");
+    System.out.printf("\t-%.2f sul tuo conto.", importo);
   }
 }
 
 class PayPal_strategy implements Pagamento_strategy {
   private static PayPal_strategy instance;
   private PayPal_strategy() {}
+
+  private static double commissioni = 1.01;
 
   public static PayPal_strategy getInstance() {
     if (instance == null) {
@@ -33,6 +36,8 @@ class PayPal_strategy implements Pagamento_strategy {
 
   public void paga(double importo) {
     System.out.println("Pagamento effettuato tramite PayPal");
+    importo *= commissioni;
+    System.out.printf("\t-%.2f sul tuo conto. (%.0f%% commissione)", importo, (commissioni-1)*100);
   }
 }
 

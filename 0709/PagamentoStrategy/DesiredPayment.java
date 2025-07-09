@@ -18,12 +18,18 @@ interface Subject {
 // ConcreteSubject
 class DesiredPayment_concretesubject implements Subject {
   private List<Observer> observers = new ArrayList<>();
-  //private Pagamento_strategy state;
+  private Pagamento_strategy strategy;
 
-  public void setState(Pagamento_strategy state) {
+  public void setState(Pagamento_strategy strategyNew) {
+
+    // con i singleton funzionerebbe anche ==
+    if (strategyNew.equals(strategy)) {
+      return;
+    }
+
     System.out.println("\nMetodo di pagamento desiderato aggiornato.\n");
-    //this.state = state;
-    notifyObservers(state);
+    this.strategy = strategyNew;
+    notifyObservers(this.strategy);
   }
 
   public void registerObserver(Observer observer) {
