@@ -7,7 +7,13 @@ class Bios {
 
 class HardDisk {
   void carica() {
-    System.out.println("Caricamento");
+    System.out.println("Caricamento da hard disk");
+  }
+}
+
+class SSD {
+  void carica() {
+    System.out.println("Caricamento da SSD");
   }
 }
 
@@ -17,7 +23,69 @@ class SistemaOperativo {
   }
 }
 
-// Facade Singleton
+
+
+class AccendiComputerSistemaA implements ComputerStrategy {
+  // Singleton
+  private static AccendiComputerSistemaA instance;
+
+  private AccendiComputerSistemaA() {}
+
+  public static AccendiComputerSistemaA getInstance() {
+    if (instance == null) {
+      return new AccendiComputerSistemaA();
+    }
+    return instance;
+  }
+  // Strategy
+
+  private Bios a = new Bios();
+  private HardDisk b = new HardDisk();
+  private SistemaOperativo c = new SistemaOperativo();
+
+  public void execute() {
+    this.accendiComputer();
+  }
+
+  public void accendiComputer() {
+    a.inizializza();
+    b.carica();
+    c.avvia();
+  }
+}
+
+class AccendiComputerSistemaB implements ComputerStrategy {
+  // Singleton
+  private static AccendiComputerSistemaB instance;
+
+  private AccendiComputerSistemaB() {}
+
+  public static AccendiComputerSistemaB getInstance() {
+    if (instance == null) {
+      return new AccendiComputerSistemaB();
+    }
+    return instance;
+  }
+
+  // Strategy
+  private Bios a = new Bios();
+  private SSD b = new SSD();
+  private SistemaOperativo c = new SistemaOperativo();
+
+  public void execute() {
+    this.accendiComputer();
+  }
+
+  public void accendiComputer() {
+    a.inizializza();
+    b.carica();
+    c.avvia();
+  }
+}
+
+
+
+// Facade Context Singleton
 class ComputerFacadeSingleton {
 
   // Singleton
@@ -32,15 +100,16 @@ class ComputerFacadeSingleton {
     return instance;
   }
 
-  // Facade
-  private Bios a = new Bios();
-  private HardDisk b = new HardDisk();
-  private SistemaOperativo c = new SistemaOperativo();
+  // Context (statico perché singleton)
+  private static ComputerStrategy strategy;
 
+  public void setStrategy(ComputerStrategy strategyNew) {
+    strategy = strategyNew;
+  }
+  
+  
   public void accendiComputer() {
-    a.inizializza();
-    b.carica();
-    c.avvia();
+    strategy.execute();
   }
 }
 

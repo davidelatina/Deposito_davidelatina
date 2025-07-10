@@ -14,7 +14,13 @@ Richiesta:
 // Client
 public class Main {
   public static void main(String[] args) {
-    ComputerFacadeSingleton facade = ComputerFacadeSingleton.getInstance();
+    var facade = ComputerFacadeSingleton.getInstance();
+    facade.setStrategy(AccendiComputerSistemaA.getInstance());
+    facade.accendiComputer();
+
+    System.out.println("Riavvio computer");
+    
+    facade.setStrategy(AccendiComputerSistemaB.getInstance());
     facade.accendiComputer();
   }
 }
