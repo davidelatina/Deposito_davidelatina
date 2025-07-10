@@ -95,7 +95,7 @@ class ComputerFacadeSingleton {
 
   public static ComputerFacadeSingleton getInstance() {
     if (instance == null) {
-      return new ComputerFacadeSingleton();
+      instance = new ComputerFacadeSingleton();
     }
     return instance;
   }
