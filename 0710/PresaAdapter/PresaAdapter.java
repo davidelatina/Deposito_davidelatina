@@ -1,4 +1,3 @@
-
 /*
 Esercizio Facile
 
@@ -9,33 +8,7 @@ Creare un adattatore per collegare una presa europea a un dispositivo con presa 
     Testare l'adattatore collegandolo ad un dispositivo europeo.
  */
 
-// Classe di oggetti fantoccio per testare il programma
-class Electricity {}
-
-// Target interface
-interface EuropeanSocket {
-  Electricity giveElectricity();
-}
-
-// Adaptee
-class AmericanSocket {
-  Electricity provideElectricity() {
-    return new Electricity();
-  }
-}
-
-// Adapter
-class SocketAdapter implements EuropeanSocket {
-  private AmericanSocket americanSocket;
-
-  SocketAdapter() {
-    this.americanSocket = new AmericanSocket();
-  }
-  
-  public Electricity giveElectricity() {
-    return americanSocket.provideElectricity();
-  }
-}
+import SocketAdapter.*;
 
 // Client
 class PresaAdapter {
