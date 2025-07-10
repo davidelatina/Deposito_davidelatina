@@ -10,12 +10,12 @@ Creare un adattatore per collegare una presa europea a un dispositivo con presa 
 
 import SocketAdapter.*;
 
-// Client
+// Client. vede solo Electricity e EuropeanSocket
 class PresaAdapter {
   public static void main(String[] args) {
 
     // Creazione adattatore attraverso interfaccia
-    EuropeanSocket americanToEuAdapter = new SocketAdapter();
+    EuropeanSocket americanToEuAdapter = EuropeanSocket.giveSocket();
 
     // Creazione dispositivo che necessita di elettricità
     Dispositivo dispositivo = new Dispositivo();
