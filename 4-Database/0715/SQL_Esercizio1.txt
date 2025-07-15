@@ -1,0 +1,12 @@
+SELECT DISTINCT Region FROM world.country
+WHERE (Continent = 'Europe');
+
+
+SELECT Name, Population FROM world.city
+WHERE (CountryCode = 'USA' AND Population > 1000000)
+ORDER BY Population DESC;
+
+
+SELECT Continent, COUNT(Name), SUM(Population) FROM world.country
+GROUP BY Continent
+ORDER BY SUM(Population) DESC;
