@@ -1,0 +1,93 @@
+-- creazione tabelle
+
+CREATE TABLE clienti (
+	id INT,
+    nome VARCHAR(100),
+    citta VARCHAR(100)
+);
+
+CREATE TABLE ordini (
+    id INT,
+    id_cliente INT,
+    data_ordine DATE,
+    importo DECIMAL(7,2)
+);
+
+-- aggiunta dati clienti
+INSERT INTO clienti (id, nome, citta) VALUES
+(1, 'Giovanni', 'Milano'),
+(2, 'Maria', 'Roma'),
+(3, 'Luca', 'Napoli'),
+(4, 'Sara', 'Torino'),
+(5, 'Paolo', 'Bologna'),
+(6, 'Elena', 'Firenze'),
+(7, 'Marco', 'Genova'),
+(8, 'Giulia', 'Venezia'),
+(9, 'Alessandro', 'Milano'),
+(10, 'Francesca', 'Napoli'),
+(11, 'Andrea', 'Torino'),
+(12, 'Loredana', 'Roma'),
+(13, 'Federico', 'Bologna'),
+(14, 'Chiara', 'Venezia'),
+(15, 'Roberto', 'Genova'),
+(16, 'Marta', 'Milano'),
+(17, 'Stefano', 'Firenze'),
+(18, 'Valentina', 'Napoli'),
+(19, 'Francesco', 'Torino'),
+(20, 'Ilaria', 'Roma'),
+(21, 'Daniele', 'Bologna'),
+(22, 'Giorgia', 'Venezia'),
+(23, 'Giuseppe', 'Milano'),
+(24, 'Lucia', 'Genova'),
+(25, 'Alessia', 'Torino'),
+(26, 'Carlo', 'Firenze'),
+(27, 'Elisabetta', 'Napoli'),
+(28, 'Antonio', 'Roma'),
+(29, 'Martina', 'Bologna'),
+(30, 'Gabriele', 'Venezia');
+
+-- aggiunta ordini
+INSERT INTO ordini (id, id_cliente, data_ordine, importo) VALUES
+(1, 1, '2025-07-01', 150.50),
+(2, 2, '2025-07-02', 200.75),
+(3, 3, '2025-07-03', 89.99),
+(4, 4, '2025-07-04', 120.30),
+(5, 5, '2025-07-05', 350.00),
+(6, 6, '2025-07-06', 78.90),
+(7, 7, '2025-07-07', 450.20),
+(8, 8, '2025-07-08', 95.60),
+(9, 9, '2025-07-09', 180.00),
+(10, 10, '2025-07-10', 130.40),
+(11, 11, '2025-07-11', 210.80),
+(12, 12, '2025-07-12', 110.25),
+(13, 13, '2025-07-13', 500.00),
+(14, 14, '2025-07-14', 65.45),
+(15, 15, '2025-07-15', 220.10),
+(16, 16, '2025-07-16', 175.99),
+(17, 17, '2025-07-17', 90.99),
+(18, 18, '2025-07-18', 320.50),
+(19, 19, '2025-07-19', 140.00),
+(20, 20, '2025-07-20', 270.00);
+
+-- aggiunta ordine anomalo (senza cliente associato)
+INSERT INTO ordini (id, id_cliente, data_ordine, importo) VALUES
+(21, 101, '2025-07-10', 999.99);
+
+
+-- tutti i clienti che hanno effettuato almeno un ordine
+SELECT nome, ordini.data_ordine, ordini.importo FROM es_join.clienti
+INNER JOIN ordini
+	ON clienti.id = ordini.id_cliente;
+
+
+-- tutti i clienti, anche chi non ha effettuato ancora un ordine
+SELECT nome, ordini.data_ordine, ordini.importo FROM es_join.clienti
+LEFT JOIN ordini 
+	ON clienti.id = ordini.id_cliente
+ORDER BY importo DESC;
+
+
+-- tutti gli ordini, anche caso anomalo di ordini senza cliente
+SELECT nome, ordini.data_ordine, ordini.importo FROM es_join.clienti
+RIGHT JOIN ordini 
+	ON clienti.id = ordini.id_cliente;
