@@ -1,0 +1,99 @@
+CREATE TABLE clienti (
+	id INT,
+    nome VARCHAR(100),
+    cognome VARCHAR(100),
+    email VARCHAR(100),
+    eta INT,
+    citta VARCHAR(100)
+    );
+
+-- aggiunta dati
+INSERT INTO clienti (id, nome, cognome, email, eta, citta) VALUES
+(1, 'Giovanni', 'Rossi', 'giovanni.rossi@email.com', 30, 'Milano'),
+(2, 'Maria', 'Bianchi', 'maria.bianchi@email.com', 25, 'Roma'),
+(3, 'Luca', 'Verdi', 'luca.verdi@email.com', 28, 'Napoli'),
+(4, 'Sara', 'Neri', 'sara.neri@email.com', 35, 'Torino'),
+(5, 'Paolo', 'Galli', 'paolo.galli@email.com', 40, 'Bologna'),
+(6, 'Elena', 'Fontana', 'elena.fontana@email.com', 32, 'Firenze'),
+(7, 'Marco', 'Serri', 'marco.serri@email.com', 27, 'Genova'),
+(8, 'Giulia', 'Mori', 'giulia.mori@email.com', 29, 'Venezia'),
+(9, 'Alessandro', 'Riva', 'alessandro.riva@email.com', 34, 'Milano'),
+(10, 'Francesca', 'Longo', 'francesca.longo@email.com', 22, 'Napoli'),
+(11, 'Andrea', 'Russo', 'andrea.russo@email.com', 26, 'Torino'),
+(12, 'Loredana', 'De Luca', 'loredana.deluca@email.com', 31, 'Roma'),
+(13, 'Federico', 'Santoro', 'federico.santoro@email.com', 36, 'Bologna'),
+(14, 'Chiara', 'Barbieri', 'chiara.barbieri@email.com', 24, 'Venezia'),
+(15, 'Roberto', 'Giordano', 'roberto.giordano@email.com', 38, 'Genova'),
+(16, 'Marta', 'Marino', 'marta.marino@email.com', 33, 'Milano'),
+(17, 'Stefano', 'Cavalli', 'stefano.cavalli@email.com', 41, 'Firenze'),
+(18, 'Valentina', 'Ricci', 'valentina.ricci@email.com', 28, 'Napoli'),
+(19, 'Francesco', 'Pellegrini', 'francesco.pellegrini@email.com', 30, 'Torino'),
+(20, 'Ilaria', 'Piras', 'ilaria.piras@email.com', 27, 'Roma'),
+(21, 'Daniele', 'Ferrari', 'daniele.ferrari@email.com', 23, 'Bologna'),
+(22, 'Giorgia', 'Gatti', 'giorgia.gatti@email.com', 32, 'Venezia'),
+(23, 'Giuseppe', 'Conti', 'giuseppe.conti@email.com', 39, 'Milano'),
+(24, 'Lucia', 'Bertolini', 'lucia.bertolini@email.com', 25, 'Genova'),
+(25, 'Alessia', 'Mancini', 'alessia.mancini@email.com', 34, 'Torino'),
+(26, 'Carlo', 'Zanetti', 'carlo.zanetti@email.com', 28, 'Firenze'),
+(27, 'Elisabetta', 'Sarto', 'elisabetta.sarto@email.com', 29, 'Napoli'),
+(28, 'Antonio', 'Russo', 'antonio.russo@email.com', 37, 'Roma'),
+(29, 'Martina', 'Di Stefano', 'martina.distefano@email.com', 32, 'Bologna'),
+(30, 'Gabriele', 'Vitali', 'gabriele.vitali@email.com', 33, 'Venezia'),
+(31, 'Raffaella', 'De Angelis', 'raffaella.deangelis@email.com', 27, 'Genova'),
+(32, 'Enrico', 'Marini', 'enrico.marini@email.com', 38, 'Torino'),
+(33, 'Sabrina', 'Rinaldi', 'sabrina.rinaldi@email.com', 24, 'Milano'),
+(34, 'Francesca', 'Ciani', 'francesca.ciani@email.com', 29, 'Firenze'),
+(35, 'Vincenzo', 'Moretti', 'vincenzo.moretti@email.com', 41, 'Napoli'),
+(36, 'Alessandra', 'Vagnoni', 'alessandra.vagnoni@email.com', 25, 'Roma'),
+(37, 'Simone', 'Grassi', 'simone.grassi@email.com', 33, 'Bologna'),
+(38, 'Carolina', 'Fabbri', 'carolina.fabbri@email.com', 30, 'Venezia'),
+(39, 'Matteo', 'Baldini', 'matteo.baldini@email.com', 40, 'Genova'),
+(40, 'Stefania', 'Lombardi', 'stefania.lombardi@email.com', 27, 'Torino'),
+(41, 'Claudio', 'Taddei', 'claudio.taddei@gmail.com', 35, 'Roma'),
+(42, 'Simona', 'Palumbo', 'simona.palumbo@gmail.com', 29, 'Bologna'),
+(43, 'Francesco', 'Lupi', 'francesco.lupi@gmail.com', 31, 'Venezia'),
+(44, 'Martina', 'Fiorentini', 'martina.fiorentini@gmail.com', 24, 'Milano'),
+(45, 'Antonio', 'Salvi', 'antonio.salvi@gmail.com', 28, 'Genova'),
+(46, 'Raffaella', 'Vincenzi', 'raffaella.vincenzi@gmail.com', 32, 'Torino'),
+(47, 'Davide', 'Bernardi', 'davide.bernardi@gmail.com', 33, 'Napoli'),
+(48, 'Luca', 'Gorini', 'luca.gorini@gmail.com', 26, 'Firenze'),
+(49, 'Chiara', 'Sarti', 'chiara.sarti@gmail.com', 29, 'Roma'),
+(50, 'Giorgio', 'Morelli', 'giorgio.morelli@gmail.com', 34, 'Venezia');
+
+
+-- email che termina in @gmail.com
+SELECT * FROM world.clienti
+WHERE email LIKE '%@gmail.com';
+
+
+-- nome inizia con A
+SELECT * FROM world.clienti
+WHERE LOWER(nome) LIKE 'a%';
+
+
+-- cognome a 5 caratteri
+SELECT * FROM world.clienti
+WHERE cognome LIKE '_____';
+
+
+-- eta tra 30 e 40
+SELECT * FROM world.clienti
+WHERE eta BETWEEN 30 AND 40;
+
+-- clienti romani
+SELECT * FROM world.clienti
+WHERE citta LIKE 'Roma';
+-- o meglio:
+SELECT * FROM world.clienti
+WHERE LOWER(citta) LIKE '%roma%';
+
+
+-- aggiunta persone con cognome a 5 caratteri ma non 5 lettere
+INSERT INTO clienti (id, nome, cognome, email, eta, citta) VALUES
+(51, 'Carlo', 'de Bie', 'giovanni.debie@email.com', 30, 'Milano'),
+(52, 'Mario', 'd\'Ayes', 'mario.dayes@email.com', 30, 'Milano');
+
+
+-- cognome a 5 caratteri con regexp
+SELECT * FROM world.clienti
+WHERE REGEXP_LIKE(cognome, "^[a-z'\ ]{5}$");
