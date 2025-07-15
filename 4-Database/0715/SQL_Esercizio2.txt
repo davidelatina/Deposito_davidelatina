@@ -1,0 +1,35 @@
+-- Creazione nuova tabella libri all'interno di schema selezionato su Workbench
+CREATE TABLE `libri`(
+id INT PRIMARY KEY,
+titolo VARCHAR(100),
+autore VARCHAR(100),
+genere VARCHAR(50),
+prezzo DECIMAL(5,2),
+anno_pubblicazione INT
+) ;
+
+
+-- aggiunta libri
+INSERT INTO libri (id, titolo, autore, genere, prezzo, anno_pubblicazione) VALUES
+(1, 'Il nome della rosa', 'Umberto Eco', 'Storico', 12.99, 1980),
+(2, '1984', 'George Orwell', 'Distopia', 9.99, 1949),
+(3, 'La solitudine dei numeri primi', 'Paolo Giordano', 'Narrativa', 14.50, 2008),
+(4, 'L’amico ritrovato', 'Fred Uhlman', 'Romanzo storico', 7.90, 1971),
+(5, 'Cien años de soledad', 'Gabriel García Márquez', 'Realismo magico', 16.00, 1967),
+(6, 'Il piccolo principe', 'Antoine de Saint-Exupéry', 'Fiaba', 8.50, 1943),
+(7, 'Il gattopardo', 'Giuseppe Tomasi di Lampedusa', 'Narrativa storica', 18.00, 1958),
+(8, 'L’arte della guerra', 'Sun Tzu', 'Filosofia', 6.50, -500),
+(9, 'Harry Potter e la pietra filosofale', 'J.K. Rowling', 'Fantasy', 15.00, 1997),
+(10, 'La casa degli spiriti', 'Isabel Allende', 'Realismo magico', 13.75, 1982);
+
+
+-- aggregazione e raggruppamento
+SELECT genere, COUNT(id), AVG(prezzo) FROM world.libri
+GROUP BY genere
+ORDER BY genere DESC;
+
+
+-- ordinamento risultati
+SELECT * FROM world.libri
+WHERE anno_pubblicazione >= 1910
+ORDER BY anno_pubblicazione DESC, prezzo ASC;
