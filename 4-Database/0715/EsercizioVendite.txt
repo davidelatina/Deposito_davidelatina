@@ -1,0 +1,115 @@
+-- creazione tabella vendite
+CREATE TABLE vendite (
+	id INT,
+    prodotto VARCHAR(100),
+    categoria VARCHAR(50),
+    quantita INT,
+    prezzo_unitario DECIMAL(6,2),
+    data_vendita DATE
+);
+  
+
+-- aggiunta elementi
+INSERT INTO vendite (id, prodotto, categoria, quantita, prezzo_unitario, data_vendita) VALUES
+(1, 'Smartphone Samsung Galaxy', 'Elettronica', 15, 299.99, '2025-07-10'),
+(2, 'Cuffie Bluetooth Sony', 'Elettronica', 25, 89.99, '2025-07-11'),
+(3, 'Laptop Dell Inspiron', 'Elettronica', 10, 749.99, '2025-07-12'),
+(4, 'Fender Stratocaster', 'Strumenti Musicali', 5, 599.99, '2025-07-13'),
+(5, 'Monitor LG 27"', 'Elettronica', 12, 199.99, '2025-07-14'),
+(6, 'Frigorifero Whirlpool', 'Elettrodomestici', 8, 499.99, '2025-07-10'),
+(7, 'Televisore 4K Samsung', 'Elettronica', 20, 399.99, '2025-07-09'),
+(8, 'Tablet Apple iPad', 'Elettronica', 30, 499.99, '2025-07-15'),
+(9, 'Smartwatch Garmin', 'Elettronica', 10, 179.99, '2025-07-10'),
+(10, 'MacBook Pro', 'Elettronica', 6, 1299.99, '2025-07-11'),
+(11, 'Asciugatrice Bosch', 'Elettrodomestici', 4, 349.99, '2025-07-12'),
+(12, 'Bicicletta da corsa Giant', 'Sport', 15, 499.99, '2025-07-13'),
+(13, 'Videocamera GoPro Hero', 'Elettronica', 8, 299.99, '2025-07-14'),
+(14, 'Macchina da caffè Nespresso', 'Elettrodomestici', 22, 99.99, '2025-07-15'),
+(15, 'Borsa Nike', 'Accessori', 50, 29.99, '2025-07-10'),
+(16, 'Pantaloni Levi\'s', 'Abbigliamento', 30, 49.99, '2025-07-12'),
+(17, 'Felpa Adidas', 'Abbigliamento', 35, 39.99, '2025-07-13'),
+(18, 'Cappello Columbia', 'Accessori', 25, 19.99, '2025-07-14'),
+(19, 'Giacca North Face', 'Abbigliamento', 18, 149.99, '2025-07-15'),
+(20, 'Scarpe da corsa Nike Air Zoom', 'Sport', 40, 109.99, '2025-07-10'),
+(21, 'Zaino Herschel', 'Accessori', 28, 69.99, '2025-07-11'),
+(22, 'Giocattolo LEGO Star Wars', 'Giochi', 15, 89.99, '2025-07-12'),
+(23, 'Bicchiere termico Contigo', 'Casa', 50, 24.99, '2025-07-13'),
+(24, 'Set da giardinaggio Fiskars', 'Giardinaggio', 12, 39.99, '2025-07-14'),
+(25, 'Lampada Philips Hue', 'Casa', 20, 79.99, '2025-07-15');
+
+
+-- aggiunta altri elementi, tra cui ordini dello stesso prodotto
+INSERT INTO vendite (id, prodotto, categoria, quantita, prezzo_unitario, data_vendita) VALUES
+(26, 'Smartphone Samsung Galaxy', 'Elettronica', 15, 299.99, '2025-07-16'),
+(27, 'Cuffie Bluetooth Sony', 'Elettronica', 25, 89.99, '2025-07-17'),
+(28, 'Laptop Dell Inspiron', 'Elettronica', 10, 749.99, '2025-07-18'),
+(29, 'Fender Stratocaster', 'Strumenti Musicali', 5, 599.99, '2025-07-19'),
+(30, 'Monitor LG 27"', 'Elettronica', 12, 199.99, '2025-07-20'),
+(31, 'Frigorifero Whirlpool', 'Elettrodomestici', 8, 499.99, '2025-07-16'),
+(32, 'Televisore 4K Samsung', 'Elettronica', 20, 399.99, '2025-07-17'),
+(33, 'Tablet Apple iPad', 'Elettronica', 30, 499.99, '2025-07-18'),
+(34, 'Smartwatch Garmin', 'Elettronica', 10, 179.99, '2025-07-19'),
+(35, 'MacBook Pro', 'Elettronica', 6, 1299.99, '2025-07-20'),
+(36, 'Asciugatrice Bosch', 'Elettrodomestici', 4, 349.99, '2025-07-16'),
+(37, 'Bicicletta da corsa Giant', 'Sport', 15, 499.99, '2025-07-17'),
+(38, 'Videocamera GoPro Hero', 'Elettronica', 8, 299.99, '2025-07-18'),
+(39, 'Macchina da caffè Nespresso', 'Elettrodomestici', 22, 99.99, '2025-07-19'),
+(40, 'Borsa Nike', 'Accessori', 50, 29.99, '2025-07-20'),
+(41, 'Pantaloni Levi\'s', 'Abbigliamento', 30, 49.99, '2025-07-16'),
+(42, 'Felpa Adidas', 'Abbigliamento', 35, 39.99, '2025-07-17'),
+(43, 'Cappello Columbia', 'Accessori', 25, 19.99, '2025-07-18'),
+(44, 'Giacca North Face', 'Abbigliamento', 18, 149.99, '2025-07-19'),
+(45, 'Scarpe da corsa Nike Air Zoom', 'Sport', 40, 109.99, '2025-07-20'),
+(46, 'Zaino Herschel', 'Accessori', 28, 69.99, '2025-07-16'),
+(47, 'Giocattolo LEGO Star Wars', 'Giochi', 15, 89.99, '2025-07-17'),
+(48, 'Bicchiere termico Contigo', 'Casa', 50, 24.99, '2025-07-18'),
+(49, 'Set da giardinaggio Fiskars', 'Giardinaggio', 12, 39.99, '2025-07-19'),
+(50, 'Lampada Philips Hue', 'Casa', 20, 79.99, '2025-07-20');
+
+
+-- totale vendite per categoria
+SELECT categoria, SUM(quantita) FROM world.vendite
+GROUP BY categoria
+ORDER BY SUM(quantita) DESC;
+
+
+-- prezzo medio per categoria
+SELECT categoria, ROUND(AVG(prezzo_unitario),2) FROM world.vendite
+GROUP BY categoria;
+
+
+-- totale quantita vendute
+SELECT prodotto, SUM(quantita) FROM world.vendite
+GROUP BY prodotto;
+
+
+-- prezzo massimo e minimo
+SELECT MAX(prezzo_unitario), MIN(prezzo_unitario) FROM world.vendite;
+
+
+-- totale vendite registrate
+SELECT COUNT(*) FROM world.vendite;
+
+
+-- totale prodotti venduti
+SELECT SUM(quantita) FROM world.vendite;
+
+
+-- 5 prodotti piu costosi
+SELECT prodotto, ROUND(AVG(prezzo_unitario),2) as 'Prezzo unitario medio' FROM world.vendite
+GROUP BY prodotto
+ORDER BY AVG(prezzo_unitario) DESC
+LIMIT 5;
+
+
+-- 3 prodotti meno venduti
+SELECT prodotto, SUM(quantita) as 'totale vendite', ROUND(AVG(prezzo_unitario),2) as 'Prezzo unitario medio' FROM world.vendite
+GROUP BY prodotto
+ORDER BY SUM(quantita) ASC
+LIMIT 3;
+
+
+-- prodotti in ordine di introiti generati
+SELECT prodotto, SUM(quantita * prezzo_unitario) AS 'totale' FROM world.vendite
+GROUP BY prodotto
+ORDER BY SUM(quantita * prezzo_unitario) DESC;
