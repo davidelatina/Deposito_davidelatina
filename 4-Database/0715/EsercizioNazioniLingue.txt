@@ -27,3 +27,20 @@ WHERE
 AND (country.LifeExpectancy > 70)
 AND LOWER(GovernmentForm) LIKE "%republic%"
 ORDER BY LifeExpectancy DESC;
+
+
+-- aggiunta numerazione classifica
+SET @index = 0;
+SELECT @index := @index+1 as posto, classifica.*
+FROM (
+	-- lista repubbliche con aspettativa di vita maggiore di 70, con lingua
+	SELECT Name, LifeExpectancy, /*GovernmentForm,*/ countrylanguage.Language
+	FROM world.country
+	INNER JOIN countrylanguage
+		ON countrylanguage.CountryCode = country.code
+	WHERE
+		countrylanguage.isOfficial = 'T'
+	AND (country.LifeExpectancy > 70)
+	AND LOWER(GovernmentForm) LIKE "%republic%"
+	ORDER BY LifeExpectancy DESC
+) AS classifica; -- ogni tabella derivata deve avere un alias
