@@ -1,0 +1,29 @@
+-- nazione e lingue di ogni città
+SELECT city.Name, country.Name, countrylanguage.Language
+FROM world.city
+INNER JOIN countrylanguage
+	ON countrylanguage.CountryCode = city.CountryCode
+INNER JOIN country
+	ON country.Code = city.CountryCode
+WHERE countrylanguage.IsOfficial = 'T';
+
+
+-- numero di città per nazione, ordinate
+SELECT country.Name, COUNT(city.Name) AS numero_citta
+FROM world.country
+INNER JOIN world.city
+	ON country.Code = city.CountryCode
+GROUP BY country.Name
+ORDER BY numero_citta DESC;
+
+
+-- lista repubbliche con aspettativa di vita maggiore di 70, con lingua
+SELECT Name, LifeExpectancy, GovernmentForm, countrylanguage.Language
+FROM world.country
+INNER JOIN countrylanguage
+	ON countrylanguage.CountryCode = country.code
+WHERE
+	countrylanguage.isOfficial = 'T'
+AND (country.LifeExpectancy > 70)
+AND LOWER(GovernmentForm) LIKE "%republic%"
+ORDER BY LifeExpectancy DESC;
