@@ -91,3 +91,54 @@ ORDER BY importo DESC;
 SELECT nome, ordini.data_ordine, ordini.importo FROM es_join.clienti
 RIGHT JOIN ordini 
 	ON clienti.id = ordini.id_cliente;
+
+
+-- PARTE 2
+
+-- aggiunta altri ordini, da stessi clienti, per avere più ordini per cliente.
+INSERT INTO ordini (id, id_cliente, data_ordine, importo) VALUES
+(21, 1, '2025-07-21', 185.50),
+(22, 3, '2025-07-22', 220.75),
+(23, 5, '2025-07-23', 99.99),
+(24, 1, '2025-07-24', 125.00),
+(25, 7, '2025-07-25', 150.30),
+(26, 6, '2025-07-26', 175.00),
+(27, 1, '2025-07-27', 220.45),
+(28, 10, '2025-07-28', 80.50),
+(29, 12, '2025-07-29', 290.60),
+(30, 5, '2025-07-30', 350.20),
+(31, 8, '2025-07-31', 210.80),
+(32, 1, '2025-08-01', 95.90),
+(33, 9, '2025-08-02', 180.30),
+(34, 14, '2025-08-03', 120.40),
+(35, 7, '2025-08-04', 140.00),
+(36, 13, '2025-08-05', 265.00),
+(37, 19, '2025-08-06', 310.00),
+(38, 1, '2025-08-07', 205.75),
+(39, 4, '2025-08-08', 245.00),
+(40, 11, '2025-08-09', 275.20);
+
+
+-- report clienti attivi
+SELECT clienti.nome, COUNT(clienti.id) as 'numero ordini', SUM(ordini.importo) as 'totale importo ordini'
+FROM es_join.clienti
+INNER JOIN ordini
+	ON clienti.id = ordini.id_cliente
+GROUP BY nome;
+
+
+-- report: tutti i clienti, anche chi non ha effettuato ancora un ordine
+SELECT clienti.nome, clienti.citta 
+FROM es_join.ordini
+RIGHT JOIN clienti 
+	ON ordini.id_cliente = clienti.id
+WHERE clienti.nome IS NOT NULL
+GROUP BY clienti.nome, clienti.citta;
+
+
+-- lista casi anomali di ordini senza cliente
+SELECT ordini.id as 'id ordine', ordini.data_ordine, ordini.importo, nome /*= NULL*/ as 'nome cliente' 
+FROM es_join.clienti
+RIGHT JOIN ordini 
+	ON ordini.id_cliente = clienti.id
+WHERE nome IS NULL;
