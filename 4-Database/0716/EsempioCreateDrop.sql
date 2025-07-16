@@ -17,6 +17,9 @@ FROM world.city;
 
 SELECT * FROM test2;
 
+-- truncate table elimina solo i valori e non la tabella
+TRUNCATE TABLE test2;
+
 DROP TABLE test2;
 
 DROP TABLE tabellatest;
